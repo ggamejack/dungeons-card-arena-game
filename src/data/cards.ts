@@ -137,6 +137,140 @@ export const gameCards: Card[] = [
     cost: 5
   },
 
+  // Epic Heroes
+  {
+    id: 11,
+    name: "Paladino da Luz Eterna",
+    type: "monster",
+    element: "holy",
+    attack: 2300,
+    defense: 2100,
+    level: 8,
+    description: "Cavaleiro sagrado que protege os inocentes.",
+    image: "",
+    rarity: "epic",
+    cost: 6
+  },
+  {
+    id: 12,
+    name: "Assassino Sombrio",
+    type: "monster",
+    element: "shadow",
+    attack: 2600,
+    defense: 1400,
+    level: 8,
+    description: "Mestre das sombras que strike from darkness.",
+    image: "",
+    rarity: "epic",
+    cost: 6
+  },
+  {
+    id: 13,
+    name: "Elemental de Raio",
+    type: "monster",
+    element: "lightning",
+    attack: 2400,
+    defense: 1700,
+    level: 7,
+    description: "Ser de energia pura dos céus.",
+    image: "",
+    rarity: "rare",
+    cost: 5
+  },
+  {
+    id: 14,
+    name: "Gigante de Ferro",
+    type: "monster",
+    element: "earth",
+    attack: 2100,
+    defense: 2300,
+    level: 7,
+    description: "Colosso metálico forjado nas profundezas.",
+    image: "",
+    rarity: "rare",
+    cost: 5
+  },
+  {
+    id: 15,
+    name: "Fênix Renascida",
+    type: "monster",
+    element: "fire",
+    attack: 2000,
+    defense: 1800,
+    level: 8,
+    description: "Ave imortal que renasce das cinzas.",
+    image: "",
+    rarity: "epic",
+    cost: 6
+  },
+
+  // Rare Monsters
+  {
+    id: 16,
+    name: "Lobo Ártico",
+    type: "monster",
+    element: "ice",
+    attack: 1600,
+    defense: 1400,
+    level: 5,
+    description: "Predador das terras geladas.",
+    image: "",
+    rarity: "rare",
+    cost: 3
+  },
+  {
+    id: 17,
+    name: "Mago Ancião",
+    type: "monster",
+    element: "lightning",
+    attack: 1500,
+    defense: 1700,
+    level: 6,
+    description: "Sábio mestre das artes arcanas.",
+    image: "",
+    rarity: "rare",
+    cost: 4
+  },
+  {
+    id: 18,
+    name: "Guerreiro Bárbaro",
+    type: "monster",
+    element: "fire",
+    attack: 1900,
+    defense: 1200,
+    level: 5,
+    description: "Lutador feroz das tribos selvagens.",
+    image: "",
+    rarity: "uncommon",
+    cost: 3
+  },
+  {
+    id: 19,
+    name: "Druida da Natureza",
+    type: "monster",
+    element: "earth",
+    attack: 1300,
+    defense: 1800,
+    level: 5,
+    description: "Guardião das florestas ancestrais.",
+    image: "",
+    rarity: "uncommon",
+    cost: 3
+  },
+  {
+    id: 20,
+    name: "Sacerdotisa da Lua",
+    type: "monster",
+    element: "holy",
+    attack: 1400,
+    defense: 1600,
+    level: 6,
+    description: "Clériga que canaliza o poder lunar.",
+    image: "",
+    rarity: "rare",
+    cost: 4
+  },
+
   // Magic Cards
   {
     id: 50,
@@ -167,6 +301,83 @@ export const gameCards: Card[] = [
     element: "holy",
     level: 4,
     description: "Restaura 1000 pontos de vida.",
+    image: "",
+    rarity: "uncommon",
+    cost: 3
+  },
+  {
+    id: 53,
+    name: "Tempestade de Raios",
+    type: "magic",
+    element: "lightning",
+    level: 5,
+    description: "Destroi todos os monstros com ATK menor que 1500.",
+    image: "",
+    rarity: "rare",
+    cost: 4
+  },
+  {
+    id: 54,
+    name: "Terremoto Devastador",
+    type: "magic",
+    element: "earth",
+    level: 6,
+    description: "Causa 400 de dano a todos os monstros no campo.",
+    image: "",
+    rarity: "rare",
+    cost: 4
+  },
+  {
+    id: 55,
+    name: "Ventania Glacial",
+    type: "magic",
+    element: "ice",
+    level: 4,
+    description: "Congela um monstro por 1 turno.",
+    image: "",
+    rarity: "uncommon",
+    cost: 3
+  },
+  {
+    id: 56,
+    name: "Luz Purificadora",
+    type: "magic",
+    element: "holy",
+    level: 5,
+    description: "Destrói todos os monstros de elemento sombra.",
+    image: "",
+    rarity: "rare",
+    cost: 4
+  },
+  {
+    id: 57,
+    name: "Meteoro Flamejante",
+    type: "magic",
+    element: "fire",
+    level: 7,
+    description: "Causa 1200 de dano a um alvo específico.",
+    image: "",
+    rarity: "epic",
+    cost: 5
+  },
+  {
+    id: 58,
+    name: "Escuridão Eterna",
+    type: "magic",
+    element: "shadow",
+    level: 6,
+    description: "Reduz o ATK de todos os monstros inimigos em 500.",
+    image: "",
+    rarity: "rare",
+    cost: 4
+  },
+  {
+    id: 59,
+    name: "Revitalizar",
+    type: "magic",
+    element: "earth",
+    level: 3,
+    description: "Ressuscita um monstro do cemitério com metade do ATK.",
     image: "",
     rarity: "uncommon",
     cost: 3
@@ -202,6 +413,76 @@ export const gameCards: Card[] = [
     image: "",
     rarity: "rare",
     cost: 4
+  },
+  {
+    id: 73,
+    name: "Buraco Negro",
+    type: "trap",
+    level: 6,
+    description: "Destrói o monstro mais forte do campo inimigo.",
+    image: "",
+    rarity: "rare",
+    cost: 4
+  },
+  {
+    id: 74,
+    name: "Campo de Força",
+    type: "trap",
+    level: 4,
+    description: "Anula o próximo ataque direcionado ao jogador.",
+    image: "",
+    rarity: "uncommon",
+    cost: 3
+  },
+  {
+    id: 75,
+    name: "Retaliação",
+    type: "trap",
+    level: 3,
+    description: "Quando você recebe dano, o oponente recebe o mesmo.",
+    image: "",
+    rarity: "common",
+    cost: 2
+  },
+  {
+    id: 76,
+    name: "Inversão de Poder",
+    type: "trap",
+    level: 5,
+    description: "Troca ATK e DEF de todos os monstros no campo.",
+    image: "",
+    rarity: "rare",
+    cost: 4
+  },
+  {
+    id: 77,
+    name: "Portal Dimensional",
+    type: "trap",
+    level: 6,
+    description: "Bane um monstro para outra dimensão por 3 turnos.",
+    image: "",
+    rarity: "epic",
+    cost: 5
+  },
+  {
+    id: 78,
+    name: "Chuva de Meteoros",
+    type: "trap",
+    level: 7,
+    description: "Causa 300 de dano para cada monstro no campo.",
+    image: "",
+    rarity: "epic",
+    cost: 5
+  },
+  {
+    id: 79,
+    name: "Regeneração Suprema",
+    type: "trap",
+    level: 4,
+    description: "Restaura 2000 HP quando ativada.",
+    image: "",
+    rarity: "uncommon",
+    cost: 3
   }
 ];
 
