@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dungeons® - Jogo de Cartas Épico</title>
+    <script>
+        // Redirect to index.html with the current path as a hash
+        // This allows the React Router to handle the routing on the client side
+        const currentPath = window.location.pathname;
+        const baseUrl = '/dungeons-card-arena-game/';
+        
+        // Remove the base path from the current path
+        const routePath = currentPath.replace(baseUrl, '');
+        
+        // Redirect to index.html with the route as a hash
+        window.location.replace(baseUrl + '#' + routePath);
+    </script>
+</head>
+<body>
+    <p>Redirecionando...</p>
+</body>
+</html>
