@@ -69,6 +69,17 @@ export default function Arena() {
   };
 
   const playCard = (card: Card) => {
+    const currentMana = gameState.currentPlayer === "player1" ? playerMana : opponentMana;
+    
+    if (card.cost > currentMana) {
+      toast({
+        title: "Mana insuficiente!",
+        description: `Você precisa de ${card.cost} mana para jogar esta carta.`,
+        variant: "destructive"
+      });
+      return;
+    }
+
     if (card.type === "monster") {
       if (currentPlayerData.field.length >= 5) {
         toast({
@@ -91,17 +102,76 @@ export default function Arena() {
         }
       }));
 
+      // Reduzir mana
+      if (gameState.currentPlayer === "player1") {
+        setPlayerMana(prev => prev - card.cost);
+      } else {
+        setOpponentMana(prev => prev - card.cost);
+      }
+
       toast({
         title: "Monstro invocado!",
         description: `${card.name} entrou no campo de batalha.`,
       });
+    } else if (card.type === "magic") {
+      // Implementar efeitos de magia
+      const newHand = currentPlayerData.hand.filter(c => c.id !== card.id);
+      const newGraveyard = [...currentPlayerData.graveyard, card];
+
+      setGameState(prev => ({
+        ...prev,
+        [gameState.currentPlayer]: {
+          ...currentPlayerData,
+          hand: newHand,
+          graveyard: newGraveyard
+        }
+      }));
+
+      // Reduzir mana
+      if (gameState.currentPlayer === "player1") {
+        setPlayerMana(prev => prev - card.cost);
+      } else {
+        setOpponentMana(prev => prev - card.cost);
+      }
+
+      // Efeito simples de magia: causar dano direto
+      if (card.attack && card.attack > 0) {
+        const damage = card.attack;
+        const newHealth = Math.max(0, opponentData.health - damage);
+
+        setGameState(prev => ({
+          ...prev,
+          [gameState.currentPlayer === "player1" ? "player2" : "player1"]: {
+            ...opponentData,
+            health: newHealth
+          }
+        }));
+
+        if (newHealth <= 0) {
+          setWinner(gameState.currentPlayer);
+        }
+
+        toast({
+          title: "Magia lançada!",
+          description: `${card.name} causou ${damage} de dano!`,
+        });
+      } else {
+        toast({
+          title: "Magia lançada!",
+          description: `${card.name} foi ativada!`,
+        });
+      }
     }
     
     setSelectedCard(null);
   };
 
-  const attack = (attackerCard: Card) => {
-    if (opponentData.field.length === 0) {
+  const [attackingCard, setAttackingCard] = useState<Card | null>(null);
+  const [playerMana, setPlayerMana] = useState(3);
+  const [opponentMana, setOpponentMana] = useState(3);
+
+  const attack = (attackerCard: Card, targetCard?: Card) => {
+    if (!targetCard && opponentData.field.length === 0) {
       // Ataque direto
       const damage = attackerCard.attack || 0;
       const newHealth = Math.max(0, opponentData.health - damage);
@@ -126,11 +196,84 @@ export default function Arena() {
           description: `${damage} de dano causado diretamente!`,
         });
       }
+    } else if (targetCard) {
+      // Combate entre monstros
+      const attackerAttack = attackerCard.attack || 0;
+      const targetDefense = targetCard.defense || 0;
+      const targetAttack = targetCard.attack || 0;
+      const attackerDefense = attackerCard.defense || 0;
+
+      let newPlayerField = [...currentPlayerData.field];
+      let newOpponentField = [...opponentData.field];
+      let newPlayerGraveyard = [...currentPlayerData.graveyard];
+      let newOpponentGraveyard = [...opponentData.graveyard];
+
+      // Determinar resultado do combate
+      if (attackerAttack > targetDefense) {
+        // Atacante destrói o defensor
+        newOpponentField = newOpponentField.filter(card => card.id !== targetCard.id);
+        newOpponentGraveyard.push(targetCard);
+        
+        if (targetAttack >= attackerDefense) {
+          // Defensor também destrói o atacante
+          newPlayerField = newPlayerField.filter(card => card.id !== attackerCard.id);
+          newPlayerGraveyard.push(attackerCard);
+        }
+        
+        toast({
+          title: "Combate!",
+          description: `${attackerCard.name} destruiu ${targetCard.name}!`,
+        });
+      } else if (targetAttack > attackerDefense) {
+        // Defensor destrói o atacante
+        newPlayerField = newPlayerField.filter(card => card.id !== attackerCard.id);
+        newPlayerGraveyard.push(attackerCard);
+        
+        toast({
+          title: "Combate!",
+          description: `${targetCard.name} destruiu ${attackerCard.name}!`,
+        });
+      } else {
+        // Empate - ambos são destruídos
+        newPlayerField = newPlayerField.filter(card => card.id !== attackerCard.id);
+        newOpponentField = newOpponentField.filter(card => card.id !== targetCard.id);
+        newPlayerGraveyard.push(attackerCard);
+        newOpponentGraveyard.push(targetCard);
+        
+        toast({
+          title: "Combate!",
+          description: "Ambos os monstros foram destruídos!",
+        });
+      }
+
+      setGameState(prev => ({
+        ...prev,
+        [gameState.currentPlayer]: {
+          ...currentPlayerData,
+          field: newPlayerField,
+          graveyard: newPlayerGraveyard
+        },
+        [gameState.currentPlayer === "player1" ? "player2" : "player1"]: {
+          ...opponentData,
+          field: newOpponentField,
+          graveyard: newOpponentGraveyard
+        }
+      }));
     }
+    
+    setAttackingCard(null);
   };
 
   const endTurn = () => {
     const nextPlayer = gameState.currentPlayer === "player1" ? "player2" : "player1";
+    
+    // Restaurar mana para o próximo jogador
+    if (nextPlayer === "player1") {
+      setPlayerMana(Math.min(10, playerMana + 1));
+    } else {
+      setOpponentMana(Math.min(10, opponentMana + 1));
+    }
+    
     setGameState(prev => ({
       ...prev,
       currentPlayer: nextPlayer,
@@ -167,11 +310,16 @@ export default function Arena() {
 
       // Try to play a monster
       setTimeout(() => {
-        const monsters = newHand.filter(card => card.type === "monster" && aiPlayer.field.length < 5);
-        if (monsters.length > 0) {
-          const randomMonster = monsters[Math.floor(Math.random() * monsters.length)];
-          const finalHand = newHand.filter(c => c.id !== randomMonster.id);
-          const finalField = [...aiPlayer.field, randomMonster];
+        const playableCards = newHand.filter(card => 
+          card.type === "monster" && 
+          aiPlayer.field.length < 5 && 
+          card.cost <= opponentMana
+        );
+        
+        if (playableCards.length > 0) {
+          const randomCard = playableCards[Math.floor(Math.random() * playableCards.length)];
+          const finalHand = newHand.filter(c => c.id !== randomCard.id);
+          const finalField = [...aiPlayer.field, randomCard];
 
           setGameState(prev => ({
             ...prev,
@@ -185,9 +333,11 @@ export default function Arena() {
             turn: prev.turn + 1
           }));
 
+          setOpponentMana(prev => prev - randomCard.cost);
+
           toast({
             title: "Oponente jogou",
-            description: `${randomMonster.name} foi invocado pelo oponente.`,
+            description: `${randomCard.name} foi invocado pelo oponente.`,
           });
         } else {
           // Just end turn
@@ -212,6 +362,9 @@ export default function Arena() {
     });
     setWinner(null);
     setSelectedCard(null);
+    setAttackingCard(null);
+    setPlayerMana(3);
+    setOpponentMana(3);
   };
 
   if (winner) {
@@ -332,6 +485,10 @@ export default function Arena() {
         </div>
 
         <div className="flex items-center gap-3">
+          <Badge variant="default" className="flex items-center gap-1 bg-blue-500/20 text-blue-400 border-blue-400/30">
+            <Zap className="w-3 h-3" />
+            {gameState.currentPlayer === "player1" ? playerMana : opponentMana} Mana
+          </Badge>
           <Badge variant="secondary" className="flex items-center gap-1">
             <Crown className="w-3 h-3" />
             Nível Épico
@@ -392,7 +549,17 @@ export default function Arena() {
                   >
                     <GameCard 
                       card={card} 
-                      className="transform hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-destructive/50"
+                      onClick={() => {
+                        if (gameState.phase === "battle" && attackingCard) {
+                          attack(attackingCard, card);
+                        }
+                      }}
+                      className={cn(
+                        "transform hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-destructive/50",
+                        gameState.phase === "battle" && attackingCard
+                          ? "cursor-pointer border-2 border-red-500/50 hover:border-red-500 animate-pulse" 
+                          : "cursor-default"
+                      )}
                     />
                   </div>
                 ))}
@@ -400,6 +567,17 @@ export default function Arena() {
                   <div className="text-center py-8 text-muted-foreground animate-pulse">
                     <Swords className="w-8 h-8 mx-auto mb-2 opacity-50" />
                     <p>Campo do oponente vazio</p>
+                    {gameState.phase === "battle" && attackingCard && (
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => attack(attackingCard)}
+                        className="mt-4 animate-glow"
+                      >
+                        <Flame className="w-4 h-4 mr-2" />
+                        Ataque Direto ({attackingCard.attack} dano)
+                      </Button>
+                    )}
                   </div>
                 )}
               </div>
@@ -435,12 +613,21 @@ export default function Arena() {
                   >
                     <GameCard 
                       card={card}
-                      onClick={() => gameState.phase === "battle" && attack(card)}
+                      onClick={() => {
+                        if (gameState.phase === "battle") {
+                          if (attackingCard) {
+                            setAttackingCard(null);
+                          } else {
+                            setAttackingCard(card);
+                          }
+                        }
+                      }}
                       className={cn(
                         "transform transition-all duration-300 shadow-lg",
                         gameState.phase === "battle" 
                           ? "hover:scale-110 hover:shadow-fire cursor-pointer animate-glow border-2 border-fire/50" 
-                          : "hover:scale-105 hover:shadow-primary/50"
+                          : "hover:scale-105 hover:shadow-primary/50",
+                        attackingCard?.id === card.id && "border-4 border-yellow-400 shadow-yellow-400/50"
                       )}
                     />
                   </div>
