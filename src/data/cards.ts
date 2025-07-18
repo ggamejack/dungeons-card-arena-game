@@ -532,4 +532,124 @@ const generateAdditionalCards = (): Card[] => {
   return additionalCards;
 };
 
-export const allCards = [...gameCards, ...generateAdditionalCards()];
+const newCards: Card[] = [
+  {
+    id: 1000,
+    name: "Dragão Ancestral de Fogo",
+    type: "monster",
+    element: "fire",
+    attack: 15,
+    defense: 12,
+    level: 10,
+    description: "O mais poderoso dos dragões, guardião das chamas eternas.",
+    image: "/lovable-uploads/8de2352d-900e-425b-aa51-e51555110dae.png",
+    rarity: "legendary",
+    cost: 12
+  },
+  {
+    id: 1001,
+    name: "Cavaleiro da Luz Divina",
+    type: "monster",
+    element: "holy",
+    attack: 11,
+    defense: 10,
+    level: 8,
+    description: "Um paladino abençoado com poderes celestiais.",
+    image: "/lovable-uploads/93317688-6a84-4d58-bc8c-63aaec1d9fe5.png",
+    rarity: "epic",
+    cost: 9
+  },
+  {
+    id: 1002,
+    name: "Elemental do Gelo Eterno",
+    type: "monster",
+    element: "ice",
+    attack: 9,
+    defense: 13,
+    level: 7,
+    description: "Criatura gelada que congela tudo ao seu redor.",
+    image: "/lovable-uploads/896816f6-7b9a-4f82-9500-6ec8d0310dbf.png",
+    rarity: "rare",
+    cost: 8
+  },
+  {
+    id: 1003,
+    name: "Mestre dos Trovões",
+    type: "monster",
+    element: "lightning",
+    attack: 13,
+    defense: 6,
+    level: 8,
+    description: "Controla os raios e tempestades com maestria.",
+    image: "/lovable-uploads/6677bc0e-5f71-4b9f-915f-754252d854ee.png",
+    rarity: "epic",
+    cost: 9
+  },
+  {
+    id: 1004,
+    name: "Guardião da Terra",
+    type: "monster",
+    element: "earth",
+    attack: 8,
+    defense: 14,
+    level: 7,
+    description: "Protetor rochoso das montanhas sagradas.",
+    image: "/lovable-uploads/b2134732-27f5-4692-b93d-e70e66db1b0c.png",
+    rarity: "rare",
+    cost: 7
+  },
+  {
+    id: 1005,
+    name: "Fênix Renascida",
+    type: "monster",
+    element: "fire",
+    attack: 10,
+    defense: 8,
+    level: 9,
+    description: "Ave lendária que renasce das próprias cinzas.",
+    image: "/lovable-uploads/5f0e9482-2619-4088-95c5-070d7faa0f57.png",
+    rarity: "legendary",
+    cost: 11
+  },
+  {
+    id: 1006,
+    name: "Sombra Assassina",
+    type: "monster",
+    element: "shadow",
+    attack: 12,
+    defense: 5,
+    level: 6,
+    description: "Assassino das trevas que ataca pelas sombras.",
+    image: "/lovable-uploads/b5125cfc-584e-484d-a7f8-284c98849d8d.png",
+    rarity: "uncommon",
+    cost: 6
+  },
+  {
+    id: 1007,
+    name: "Anjo da Justiça",
+    type: "monster",
+    element: "holy",
+    attack: 14,
+    defense: 9,
+    level: 9,
+    description: "Servo celestial que pune os ímpios.",
+    image: "/lovable-uploads/1cd11615-c80b-4c55-a474-ee5ff09beee9.png",
+    rarity: "legendary",
+    cost: 12
+  },
+  {
+    id: 1008,
+    name: "Espírito da Natureza",
+    type: "monster",
+    element: "earth",
+    attack: 7,
+    defense: 11,
+    level: 5,
+    description: "Entidade verde que protege as florestas.",
+    image: "/lovable-uploads/23989923-ed6f-49f6-b57f-b40351d604b7.png",
+    rarity: "common",
+    cost: 5
+  }
+];
+
+export const allCards = [...gameCards, ...generateAdditionalCards(), ...newCards];
