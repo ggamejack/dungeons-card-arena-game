@@ -307,6 +307,13 @@ export default function Arena() {
     });
     setWinner(null);
     setSelectedCard(null);
+    setAttackingCard(null);
+    setGameEnded(false);
+    
+    toast({
+      title: "⚔️ Nova Batalha Iniciada!",
+      description: "Que a sorte esteja com você, guerreiro!",
+    });
   };
 
   if (winner) {

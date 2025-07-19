@@ -1,37 +1,82 @@
 import { Card } from "@/types/Card";
+import phoenixScarlet from '@/assets/cards/phoenix-scarlet.jpg';
+import leviathanAbyss from '@/assets/cards/leviathan-abyss.jpg';
+import demonEternalNight from '@/assets/cards/demon-eternal-night.jpg';
+import guardianAngel from '@/assets/cards/guardian-angel.jpg';
+import crystalGolem from '@/assets/cards/crystal-golem.jpg';
+import meteorRain from '@/assets/cards/meteor-rain.jpg';
 
 export const gameCards: Card[] = [
-  // Legendary Monsters (3000 ATK)
+  // LEGENDARY MONSTERS BASED ON DETAILED PROMPTS
   {
     id: 1,
-    name: "Lorde das Sombras Supremo",
+    name: "Fênix Escarlate",
     type: "monster",
-    element: "shadow",
-    attack: 3000,
-    defense: 2500,
-    level: 10,
-    description: "O terror das trevas eternas. Mestre absoluto das sombras.",
-    image: "/lovable-uploads/be9404b9-6911-4bb6-9144-84922c55f4ef.png",
+    element: "fire",
+    attack: 2400,
+    defense: 1600,
+    level: 6,
+    description: "Renasce com metade do ATK após ser destruída.",
+    image: phoenixScarlet,
     rarity: "legendary",
-    cost: 8
+    cost: 6
   },
   {
     id: 2,
-    name: "Unicórnio Celestial Dourado",
+    name: "Leviatã do Abismo",
     type: "monster",
-    element: "holy",
-    attack: 3000,
-    defense: 2000,
-    level: 10,
-    description: "Criatura divina dos céus. Sua pureza é incomparável.",
-    image: "/lovable-uploads/406d710e-4778-4c77-81e4-11f61d6e6584.png",
+    element: "ice",
+    attack: 2800,
+    defense: 2200,
+    level: 8,
+    description: "Reduz o ATK de monstros de fogo em 1000.",
+    image: leviathanAbyss,
     rarity: "legendary",
     cost: 8
   },
-
-  // Legendary Defenders (3000 DEF)
   {
     id: 3,
+    name: "Demônio da Noite Eterna",
+    type: "monster",
+    element: "shadow",
+    attack: 3000,
+    defense: 1800,
+    level: 9,
+    description: "Sacrifica 1 carta do campo para ganhar +1000 ATK até o fim do turno.",
+    image: demonEternalNight,
+    rarity: "legendary",
+    cost: 9
+  },
+  {
+    id: 4,
+    name: "Anjo Guardião",
+    type: "monster",
+    element: "holy",
+    attack: 2300,
+    defense: 2700,
+    level: 7,
+    description: "Protege monstros aliados por 1 turno.",
+    image: guardianAngel,
+    rarity: "legendary",
+    cost: 7
+  },
+  {
+    id: 5,
+    name: "Golem de Cristal",
+    type: "monster",
+    element: "earth",
+    attack: 1800,
+    defense: 3000,
+    level: 7,
+    description: "Não pode ser destruído por monstros com ATK < 2000.",
+    image: crystalGolem,
+    rarity: "legendary",
+    cost: 7
+  },
+
+  // EXISTING LEGENDARY DEFENDERS
+  {
+    id: 6,
     name: "Titã de Pedra Ancestral",
     type: "monster",
     element: "earth",
@@ -44,7 +89,7 @@ export const gameCards: Card[] = [
     cost: 7
   },
   {
-    id: 4,
+    id: 7,
     name: "Mestre do Vazio Eterno",
     type: "monster",
     element: "shadow",
@@ -467,10 +512,10 @@ export const gameCards: Card[] = [
   {
     id: 78,
     name: "Chuva de Meteoros",
-    type: "trap",
+    type: "magic",
     level: 7,
-    description: "Causa 300 de dano para cada monstro no campo.",
-    image: "",
+    description: "Causa 500 de dano a todos os monstros no campo.",
+    image: meteorRain,
     rarity: "epic",
     cost: 5
   },
