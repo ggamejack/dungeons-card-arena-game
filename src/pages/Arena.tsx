@@ -41,6 +41,8 @@ export default function Arena() {
 
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [winner, setWinner] = useState<string | null>(null);
+  const [attackingCard, setAttackingCard] = useState<number | null>(null);
+  const [gameEnded, setGameEnded] = useState(false);
 
   const currentPlayerData = gameState.currentPlayer === "player1" ? gameState.player1 : gameState.player2;
   const opponentData = gameState.currentPlayer === "player1" ? gameState.player2 : gameState.player1;
@@ -100,6 +102,98 @@ export default function Arena() {
     setSelectedCard(null);
   };
 
+  const handleAttack = (attackerCard: Card, targetCard: Card) => {
+    if (gameState.phase !== 'battle') return;
+
+    const currentPlayerState = gameState.currentPlayer === 'player1' ? gameState.player1 : gameState.player2;
+    const opponentState = gameState.currentPlayer === 'player1' ? gameState.player2 : gameState.player1;
+
+    // Check if attacker belongs to current player
+    const attackerExists = currentPlayerState.field.some(card => card.id === attackerCard.id);
+    if (!attackerExists) return;
+
+    // Check if target belongs to opponent
+    const targetExists = opponentState.field.some(card => card.id === targetCard.id);
+    if (!targetExists) return;
+
+    const attackValue = attackerCard.attack || 0;
+    const defenseValue = targetCard.defense || 0;
+    
+    // Add attack animation
+    setAttackingCard(attackerCard.id);
+    
+    // Damage calculation: if attack > defense, excess damage goes to player
+    if (attackValue > defenseValue) {
+      const excessDamage = attackValue - defenseValue;
+      
+      // Target card is destroyed
+      const newOpponentState = {
+        ...opponentState,
+        field: opponentState.field.filter(card => card.id !== targetCard.id),
+        graveyard: [...opponentState.graveyard, targetCard],
+        health: opponentState.health - excessDamage // Apply excess damage to player
+      };
+
+      setGameState(prev => ({
+        ...prev,
+        [gameState.currentPlayer === 'player1' ? 'player2' : 'player1']: newOpponentState
+      }));
+
+      // Victory check
+      if (newOpponentState.health <= 0) {
+        toast({
+          title: "VITÓRIA! 🏆",
+          description: `${gameState.currentPlayer === 'player1' ? 'Jogador 1' : 'Jogador 2'} venceu a batalha!`,
+        });
+        setWinner(gameState.currentPlayer);
+        setGameEnded(true);
+        return;
+      }
+
+      toast({
+        title: "Ataque Devastador! ⚡",
+        description: `${attackerCard.name} destruiu ${targetCard.name} e causou ${excessDamage} de dano direto! (${attackValue} ATK vs ${defenseValue} DEF)`,
+      });
+    } else if (attackValue === defenseValue) {
+      // Both cards are destroyed
+      setGameState(prev => ({
+        ...prev,
+        [gameState.currentPlayer === 'player1' ? 'player1' : 'player2']: {
+          ...currentPlayerState,
+          field: currentPlayerState.field.filter(card => card.id !== attackerCard.id),
+          graveyard: [...currentPlayerState.graveyard, attackerCard]
+        },
+        [gameState.currentPlayer === 'player1' ? 'player2' : 'player1']: {
+          ...opponentState,
+          field: opponentState.field.filter(card => card.id !== targetCard.id),
+          graveyard: [...opponentState.graveyard, targetCard]
+        }
+      }));
+
+      toast({
+        title: "Confronto Épico! ⚔️",
+        description: `${attackerCard.name} e ${targetCard.name} se destruíram mutuamente! (${attackValue} ATK vs ${defenseValue} DEF)`,
+      });
+    } else {
+      // Attacker is destroyed, defender survives
+      setGameState(prev => ({
+        ...prev,
+        [gameState.currentPlayer === 'player1' ? 'player1' : 'player2']: {
+          ...currentPlayerState,
+          field: currentPlayerState.field.filter(card => card.id !== attackerCard.id),
+          graveyard: [...currentPlayerState.graveyard, attackerCard]
+        }
+      }));
+
+      toast({
+        title: "Ataque Falhado! 🛡️",
+        description: `${targetCard.name} destruiu ${attackerCard.name} em contraataque! (${attackValue} ATK vs ${defenseValue} DEF)`,
+      });
+    }
+    
+    setTimeout(() => setAttackingCard(null), 1500);
+  };
+
   const attack = (attackerCard: Card) => {
     if (opponentData.field.length === 0) {
       // Ataque direto
@@ -116,6 +210,7 @@ export default function Arena() {
 
       if (newHealth <= 0) {
         setWinner(gameState.currentPlayer);
+        setGameEnded(true);
         toast({
           title: "Vitória!",
           description: "Você derrotou seu oponente!",
@@ -387,13 +482,29 @@ export default function Arena() {
                 {opponentData.field.map((card, index) => (
                   <div 
                     key={`${card.id}-${index}`}
-                    className="animate-scale-in"
+                    className={`animate-scale-in relative transform transition-all duration-500 hover:scale-110 ${
+                      attackingCard === card.id ? 'animate-pulse scale-110 border-4 border-red-500 shadow-2xl shadow-red-500/80' : ''
+                    }`}
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     <GameCard 
                       card={card} 
-                      className="transform hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-destructive/50"
+                      className="transform transition-all duration-300 shadow-lg hover:shadow-destructive/50"
+                      onClick={() => {
+                        if (gameState.phase === 'battle' && gameState.currentPlayer === 'player1') {
+                          const playerCard = currentPlayerData.field[0]; // For demo, use first card
+                          if (playerCard) handleAttack(playerCard, card);
+                        }
+                      }}
                     />
+                    {attackingCard === card.id && (
+                      <div className="absolute inset-0 pointer-events-none">
+                        <div className="absolute inset-0 bg-red-500/30 rounded-lg animate-ping" />
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                          <span className="text-4xl animate-bounce">💥</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
                 {opponentData.field.length === 0 && (
@@ -435,14 +546,33 @@ export default function Arena() {
                   >
                     <GameCard 
                       card={card}
-                      onClick={() => gameState.phase === "battle" && attack(card)}
+                      onClick={() => {
+                        if (gameState.phase === "battle") {
+                          if (opponentData.field.length > 0) {
+                            // Attack first opponent card for demo
+                            const target = opponentData.field[0];
+                            if (target) handleAttack(card, target);
+                          } else {
+                            attack(card);
+                          }
+                        }
+                      }}
                       className={cn(
-                        "transform transition-all duration-300 shadow-lg",
+                        "transform transition-all duration-300 shadow-lg relative",
                         gameState.phase === "battle" 
                           ? "hover:scale-110 hover:shadow-fire cursor-pointer animate-glow border-2 border-fire/50" 
-                          : "hover:scale-105 hover:shadow-primary/50"
+                          : "hover:scale-105 hover:shadow-primary/50",
+                        attackingCard === card.id ? 'animate-pulse scale-110 border-4 border-red-500 shadow-2xl shadow-red-500/80' : ''
                       )}
                     />
+                    {attackingCard === card.id && (
+                      <div className="absolute inset-0 pointer-events-none">
+                        <div className="absolute inset-0 bg-red-500/30 rounded-lg animate-ping" />
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                          <span className="text-4xl animate-bounce">⚔️</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
                 {currentPlayerData.field.length === 0 && (

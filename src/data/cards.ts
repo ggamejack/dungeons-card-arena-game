@@ -652,4 +652,137 @@ const newCards: Card[] = [
   }
 ];
 
-export const allCards = [...gameCards, ...generateAdditionalCards(), ...newCards];
+const premiumCards: Card[] = [
+  {
+    id: 2000,
+    name: "Arcanjo Gabriel",
+    type: "monster",
+    element: "holy",
+    attack: 18,
+    defense: 15,
+    level: 12,
+    description: "O mais poderoso dos arcanjos, mensageiro divino com força celestial.",
+    image: "/lovable-uploads/43109396-a769-44b4-818f-1f797ee22f52.png",
+    rarity: "legendary",
+    cost: 15
+  },
+  {
+    id: 2001,
+    name: "Serafim da Justiça",
+    type: "monster",
+    element: "holy",
+    attack: 16,
+    defense: 13,
+    level: 11,
+    description: "Guardião celestial que pune os pecadores com luz divina.",
+    image: "/lovable-uploads/93e1cfb2-1a99-42de-b3f1-c70a260bd479.png",
+    rarity: "legendary",
+    cost: 14
+  },
+  {
+    id: 2002,
+    name: "Lorde das Trevas",
+    type: "monster",
+    element: "shadow",
+    attack: 20,
+    defense: 12,
+    level: 12,
+    description: "Senhor supremo das sombras, corruptor de almas.",
+    image: "/lovable-uploads/9eecb997-c318-4245-8002-492ea0f546bf.png",
+    rarity: "legendary",
+    cost: 16
+  },
+  {
+    id: 2003,
+    name: "Demônio do Abismo",
+    type: "monster",
+    element: "shadow",
+    attack: 17,
+    defense: 10,
+    level: 10,
+    description: "Criatura infernal que emerge das profundezas do abismo.",
+    image: "/lovable-uploads/b745b9a0-bb80-4788-92ff-04357d1d3a69.png",
+    rarity: "epic",
+    cost: 13
+  },
+  {
+    id: 2004,
+    name: "Titã do Gelo Eterno",
+    type: "monster",
+    element: "ice",
+    attack: 15,
+    defense: 18,
+    level: 11,
+    description: "Gigante ancestral das terras geladas com poder congelante.",
+    image: "/lovable-uploads/15a8d434-2b12-4b22-8537-31e198cdcdd8.png",
+    rarity: "legendary",
+    cost: 14
+  },
+  {
+    id: 2005,
+    name: "Deusa da Luna",
+    type: "monster",
+    element: "holy",
+    attack: 14,
+    defense: 16,
+    level: 10,
+    description: "Divindade lunar que controla as marés e o destino.",
+    image: "/lovable-uploads/38499ffe-dbfa-4b49-a357-8cac32af8b3c.png",
+    rarity: "legendary",
+    cost: 13
+  },
+  {
+    id: 2006,
+    name: "Águia do Trovão",
+    type: "monster",
+    element: "lightning",
+    attack: 19,
+    defense: 8,
+    level: 9,
+    description: "Ave lendária que cavalga as tempestades com velocidade divina.",
+    image: "/lovable-uploads/699b67df-94bc-415d-abb4-9d688ef5e6d1.png",
+    rarity: "epic",
+    cost: 12
+  },
+  {
+    id: 2007,
+    name: "Raposa de Fogo Mística",
+    type: "monster",
+    element: "fire",
+    attack: 12,
+    defense: 14,
+    level: 8,
+    description: "Espírito vulpino com chamas sagradas que purificam.",
+    image: "/lovable-uploads/e6a6b15b-2a22-46aa-ae00-6b2eb3c6fb65.png",
+    rarity: "rare",
+    cost: 10
+  },
+  {
+    id: 2008,
+    name: "Golem de Magma",
+    type: "monster",
+    element: "fire",
+    attack: 16,
+    defense: 20,
+    level: 10,
+    description: "Construto de rocha e magma com força devastadora.",
+    image: "/lovable-uploads/d80aaac7-9c5c-409c-86c1-990916520fba.png",
+    rarity: "epic",
+    cost: 13
+  },
+  {
+    id: 2009,
+    name: "Feiticeiro das Sombras",
+    type: "monster",
+    element: "shadow",
+    attack: 13,
+    defense: 11,
+    level: 9,
+    description: "Mago negro que manipula as trevas para invocar poderes proibidos.",
+    image: "/lovable-uploads/bdeb866c-9a3f-45cb-bbbd-b8b78da78cba.png",
+    rarity: "epic",
+    cost: 11
+  }
+];
+
+export const allCards = [...gameCards, ...generateAdditionalCards(), ...newCards, ...premiumCards];

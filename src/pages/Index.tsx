@@ -128,7 +128,7 @@ const Index = () => {
             ))}
           </div>
           
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               variant="hero" 
               size="lg"
@@ -136,6 +136,14 @@ const Index = () => {
             >
               <Swords className="w-5 h-5 mr-2" />
               ENTRE NA ARENA AGORA!
+            </Button>
+            <Button 
+              variant="magical" 
+              size="lg"
+              onClick={() => navigate("/marketplace")}
+            >
+              <Crown className="w-5 h-5 mr-2" />
+              MARKETPLACE
             </Button>
           </div>
         </div>
