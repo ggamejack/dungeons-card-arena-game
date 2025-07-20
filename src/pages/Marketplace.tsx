@@ -14,7 +14,7 @@ const premiumDecks = [
     price: 25.99,
     cards: 15,
     rarity: "Legendary",
-    image: "/lovable-uploads/43109396-a769-44b4-818f-1f797ee22f52.png"
+    image: "/dungeons-card-arena-game/lovable-uploads/43109396-a769-44b4-818f-1f797ee22f52.png"
   },
   {
     id: "premium-shadows",
@@ -23,7 +23,7 @@ const premiumDecks = [
     price: 23.99,
     cards: 15,
     rarity: "Epic",
-    image: "/lovable-uploads/9eecb997-c318-4245-8002-492ea0f546bf.png"
+    image: "/dungeons-card-arena-game/lovable-uploads/9eecb997-c318-4245-8002-492ea0f546bf.png"
   },
   {
     id: "premium-elementals",
@@ -32,7 +32,7 @@ const premiumDecks = [
     price: 29.99,
     cards: 20,
     rarity: "Legendary",
-    image: "/lovable-uploads/15a8d434-2b12-4b22-8537-31e198cdcdd8.png"
+    image: "/dungeons-card-arena-game/lovable-uploads/15a8d434-2b12-4b22-8537-31e198cdcdd8.png"
   },
   {
     id: "premium-mythical",
@@ -41,7 +41,7 @@ const premiumDecks = [
     price: 35.99,
     cards: 25,
     rarity: "Mythical",
-    image: "/lovable-uploads/38499ffe-dbfa-4b49-a357-8cac32af8b3c.png"
+    image: "/dungeons-card-arena-game/lovable-uploads/38499ffe-dbfa-4b49-a357-8cac32af8b3c.png"
   }
 ];
 
@@ -55,7 +55,7 @@ const newPremiumCards: Card[] = [
     defense: 15,
     level: 12,
     description: "O mais poderoso dos arcanjos, mensageiro divino com força celestial.",
-    image: "/lovable-uploads/43109396-a769-44b4-818f-1f797ee22f52.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/43109396-a769-44b4-818f-1f797ee22f52.png",
     rarity: "legendary",
     cost: 15
   },
