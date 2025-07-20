@@ -1,10 +1,11 @@
 import { Card } from "@/types/Card";
-import phoenixScarlet from '@/assets/cards/phoenix-scarlet.jpg';
-import leviathanAbyss from '@/assets/cards/leviathan-abyss.jpg';
-import demonEternalNight from '@/assets/cards/demon-eternal-night.jpg';
-import guardianAngel from '@/assets/cards/guardian-angel.jpg';
-import crystalGolem from '@/assets/cards/crystal-golem.jpg';
-import meteorRain from '@/assets/cards/meteor-rain.jpg';
+// Using public URLs for GitHub Pages compatibility
+const phoenixScarlet = "/dungeons-card-arena-game/lovable-uploads/43109396-a769-44b4-818f-1f797ee22f52.png";
+const leviathanAbyss = "/dungeons-card-arena-game/lovable-uploads/93e1cfb2-1a99-42de-b3f1-c70a260bd479.png";
+const demonEternalNight = "/dungeons-card-arena-game/lovable-uploads/9eecb997-c318-4245-8002-492ea0f546bf.png";
+const guardianAngel = "/dungeons-card-arena-game/lovable-uploads/b745b9a0-bb80-4788-92ff-04357d1d3a69.png";
+const crystalGolem = "/dungeons-card-arena-game/lovable-uploads/15a8d434-2b12-4b22-8537-31e198cdcdd8.png";
+const meteorRain = "/dungeons-card-arena-game/lovable-uploads/38499ffe-dbfa-4b49-a357-8cac32af8b3c.png";
 
 export const gameCards: Card[] = [
   // LEGENDARY MONSTERS BASED ON DETAILED PROMPTS
