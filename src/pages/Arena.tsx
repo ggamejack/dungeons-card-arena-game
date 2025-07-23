@@ -8,7 +8,8 @@ import { Heart, Zap, ArrowLeft, Swords, Shield, Crown, Sparkles, Flame, Snowflak
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
-import { calculateBattle, calculateBattlePoints, getAIStrategy, getElementalAdvantage } from "@/utils/battleSystem";
+import { calculateBattle, calculateBattlePoints, getAIStrategy, getElementalAdvantage, canSummonCard } from "@/utils/battleSystem";
+import { Navigation } from "@/components/Navigation";
 
 const createInitialDeck = (): Card[] => {
   // Shuffle and take 20 cards for each player
@@ -22,6 +23,7 @@ const createPlayer = (id: string, name: string): Player => {
     id,
     name,
     health: 4000,
+    energy: 1,
     hand: deck.slice(0, 5),
     deck: deck.slice(5),
     field: [],
@@ -84,12 +86,24 @@ export default function Arena() {
     setAttackingCard(null);
     setSelectedCard(null);
     
-    setGameState(prev => ({
-      ...prev,
-      currentPlayer: prev.currentPlayer === "player1" ? "player2" : "player1",
-      phase: "draw",
-      turn: prev.currentPlayer === "player2" ? prev.turn + 1 : prev.turn
-    }));
+    setGameState(prev => {
+      const newState = { ...prev };
+      const nextPlayer = prev.currentPlayer === "player1" ? "player2" : "player1";
+      
+      // Adiciona energia ao jogador que vai jogar
+      if (nextPlayer === "player1") {
+        newState.player1.energy = Math.min(newState.player1.energy + 1, 12);
+      } else {
+        newState.player2.energy = Math.min(newState.player2.energy + 1, 12);
+      }
+      
+      return {
+        ...newState,
+        currentPlayer: nextPlayer,
+        phase: "draw",
+        turn: prev.currentPlayer === "player2" ? prev.turn + 1 : prev.turn
+      };
+    });
 
     toast({
       title: "🔄 Turno Finalizado",
@@ -99,6 +113,16 @@ export default function Arena() {
 
   const summonCard = (card: Card) => {
     if (card.type !== "monster" || currentPlayerData.field.length >= 5) return;
+    
+    // Verifica se tem energia suficiente
+    if (!canSummonCard(card, currentPlayerData.energy)) {
+      toast({
+        title: "⚡ Energia Insuficiente!",
+        description: `Precisa de ${card.cost} energia para invocar ${card.name}. Você tem ${currentPlayerData.energy}.`,
+        variant: "destructive"
+      });
+      return;
+    }
 
     setGameState(prev => {
       const newState = { ...prev };
@@ -108,10 +132,11 @@ export default function Arena() {
       if (handIndex !== -1) {
         currentPlayer.hand.splice(handIndex, 1);
         currentPlayer.field.push(card);
+        currentPlayer.energy -= card.cost; // Consome energia
         
         toast({
           title: "⚔️ Monstro Invocado!",
-          description: `${card.name} entrou no campo de batalha.`,
+          description: `${card.name} entrou no campo de batalha! (-${card.cost} energia)`,
         });
       }
 
@@ -282,6 +307,10 @@ export default function Arena() {
     setSelectedCard(null);
     setAttackingCard(null);
     setGameEnded(false);
+    setTotalDamageDealt(0);
+    setCardsUsed([]);
+    setCombosUsed(0);
+    setBattlePoints(0);
     
     toast({
       title: "⚔️ Nova Batalha Iniciada!",
@@ -431,6 +460,10 @@ export default function Arena() {
                 {opponentData.hand.length}
               </Badge>
               <Badge variant="outline" className="text-xs sm:text-lg px-2 sm:px-4 py-1 sm:py-2">
+                <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-yellow-400" />
+                {opponentData.energy}
+              </Badge>
+              <Badge variant="outline" className="text-xs sm:text-lg px-2 sm:px-4 py-1 sm:py-2">
                 {opponentData.deck.length}
               </Badge>
             </div>
@@ -539,6 +572,10 @@ export default function Arena() {
                 {currentPlayerData.hand.length}
               </Badge>
               <Badge variant="outline" className="text-xs sm:text-lg px-2 sm:px-4 py-1 sm:py-2">
+                <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-yellow-400" />
+                {currentPlayerData.energy}
+              </Badge>
+              <Badge variant="outline" className="text-xs sm:text-lg px-2 sm:px-4 py-1 sm:py-2">
                 {currentPlayerData.deck.length}
               </Badge>
             </div>
@@ -596,6 +633,8 @@ export default function Arena() {
           </Button>
         </div>
       </div>
+
+      <Navigation />
     </div>
   );
 }

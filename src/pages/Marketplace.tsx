@@ -5,6 +5,7 @@ import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
 import { ShoppingCart, Coins, Star, Sparkles } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
+import { Navigation } from "../components/Navigation";
 
 const premiumDecks = [
   {
@@ -302,6 +303,8 @@ export default function Marketplace() {
           </p>
         </div>
       </div>
+
+      <Navigation />
     </div>
   );
 }

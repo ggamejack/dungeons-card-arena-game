@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { achievements } from "@/data/achievements";
 import { adventureMissions, dailyMissions } from "@/data/missions";
 import { Crown, Target, Calendar, Map, ArrowLeft } from "lucide-react";
+import { Navigation } from "@/components/Navigation";
 
 const Achievements = () => {
   const navigate = useNavigate();
@@ -164,6 +165,8 @@ const Achievements = () => {
           </TabsContent>
         </Tabs>
       </div>
+      
+      <Navigation />
     </div>
   );
 };

@@ -46,6 +46,11 @@ export function getElementalAdvantage(attacker: Card, defender: Card): number {
   return 1.0; // Neutro
 }
 
+// Verifica se o jogador tem energia suficiente para invocar a carta
+export function canSummonCard(card: Card, currentEnergy: number): boolean {
+  return currentEnergy >= card.cost;
+}
+
 // Sistema de batalha melhorado
 export function calculateBattle(
   attackerCard: Card, 

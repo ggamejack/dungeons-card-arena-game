@@ -5,7 +5,8 @@ import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { allCards } from "@/data/cards";
 import { useNavigate } from "react-router-dom";
 import { Swords, Sparkles, Crown, Zap, Trophy } from "lucide-react";
-import heroImage from "@/assets/epic-dungeon-background.jpg";
+import heroImage from "@/assets/game-layout-background.jpg";
+import { Navigation } from "@/components/Navigation";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -169,6 +170,8 @@ const Index = () => {
           </p>
         </div>
       </footer>
+
+      <Navigation />
     </div>
   );
 };

@@ -19,6 +19,7 @@ export interface Player {
   id: string;
   name: string;
   health: number;
+  energy: number;
   hand: Card[];
   deck: Card[];
   field: Card[];
