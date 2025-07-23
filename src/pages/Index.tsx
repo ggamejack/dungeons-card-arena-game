@@ -4,8 +4,8 @@ import { GameCard } from "@/components/GameCard";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { allCards } from "@/data/cards";
 import { useNavigate } from "react-router-dom";
-import { Swords, Sparkles, Crown, Zap } from "lucide-react";
-import heroImage from "@/assets/hero-banner.jpg";
+import { Swords, Sparkles, Crown, Zap, Trophy } from "lucide-react";
+import heroImage from "@/assets/epic-dungeon-background.jpg";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -144,6 +144,15 @@ const Index = () => {
             >
               <Crown className="w-5 h-5 mr-2" />
               MARKETPLACE
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg"
+              onClick={() => navigate("/achievements")}
+              className="border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white"
+            >
+              <Trophy className="w-5 h-5 mr-2" />
+              CONQUISTAS
             </Button>
           </div>
         </div>

@@ -332,6 +332,138 @@ export const gameCards: Card[] = [
     cost: 4
   },
 
+  // NOVAS CARTAS LENDÁRIAS ADICIONADAS
+  {
+    id: 71,
+    name: "Titã Sombrio",
+    type: "monster",
+    element: "shadow",
+    attack: 3200,
+    defense: 2800,
+    level: 10,
+    description: "Colosso das trevas eternas. Não pode ser destruído por efeitos que reduzem DEF.",
+    image: "/lovable-uploads/6ac1858c-5ff8-46e8-bdf7-4282d1709156.png",
+    rarity: "legendary",
+    cost: 10
+  },
+  {
+    id: 72,
+    name: "Cyborg Destruidor",
+    type: "monster",
+    element: "lightning",
+    attack: 2900,
+    defense: 2400,
+    level: 9,
+    description: "Máquina de guerra. Ganha +300 ATK para cada carta mágica no cemitério.",
+    image: "/lovable-uploads/f718c075-7904-46ce-8868-6190329e7083.png",
+    rarity: "legendary",
+    cost: 9
+  },
+  {
+    id: 73,
+    name: "Cavaleiro Real",
+    type: "monster",
+    element: "holy",
+    attack: 2700,
+    defense: 2600,
+    level: 8,
+    description: "Nobre guerreiro montado. Pode atacar diretamente se não houver monstros no campo.",
+    image: "/lovable-uploads/2f780a0b-9aed-47b4-8db5-7bf1c6bdb2b4.png",
+    rarity: "legendary",
+    cost: 8
+  },
+  {
+    id: 74,
+    name: "Dragão de Gelo Ancestral",
+    type: "monster",
+    element: "ice",
+    attack: 3100,
+    defense: 2700,
+    level: 10,
+    description: "Senhor dos ventos gelados. Congela monstros inimigos por 1 turno ao atacar.",
+    image: "/lovable-uploads/2f9962ee-f232-44d8-bd8e-8261cd9db4ed.png",
+    rarity: "legendary",
+    cost: 10
+  },
+  {
+    id: 75,
+    name: "Tigre do Raio",
+    type: "monster",
+    element: "lightning",
+    attack: 2800,
+    defense: 2200,
+    level: 9,
+    description: "Felino elemental. Ataca duas vezes por turno se o oponente tiver mais de 3 cartas na mão.",
+    image: "/lovable-uploads/c201c4ce-832e-429c-934d-c0b9d57f2210.png",
+    rarity: "legendary",
+    cost: 9
+  },
+  {
+    id: 76,
+    name: "Anjo Dourado",
+    type: "monster",
+    element: "holy",
+    attack: 2500,
+    defense: 2800,
+    level: 8,
+    description: "Arqueira celestial. Pode atirar em qualquer monstro no campo inimigo.",
+    image: "/lovable-uploads/a659e78d-b68a-427f-982c-9b7d53be6164.png",
+    rarity: "legendary",
+    cost: 8
+  },
+  {
+    id: 77,
+    name: "Serafim de Prata",
+    type: "monster",
+    element: "holy",
+    attack: 2600,
+    defense: 2900,
+    level: 9,
+    description: "Guardião dos céus. Monstros sagrados aliados ganham +500 ATK/DEF.",
+    image: "/lovable-uploads/78ff5764-386d-4c04-b141-b4b63f40440f.png",
+    rarity: "legendary",
+    cost: 9
+  },
+  {
+    id: 78,
+    name: "Serafim de Fogo",
+    type: "monster",
+    element: "fire",
+    attack: 2800,
+    defense: 2500,
+    level: 9,
+    description: "Anjo das chamas eternas. Causa 300 de dano a todos os inimigos quando invocado.",
+    image: "/lovable-uploads/f520c635-15d5-4491-b2e8-bbe52212b1ae.png",
+    rarity: "legendary",
+    cost: 9
+  },
+  {
+    id: 79,
+    name: "Guerreiro do Deserto",
+    type: "monster",
+    element: "fire",
+    attack: 2400,
+    defense: 2100,
+    level: 7,
+    description: "Nomade das areias ardentes. Imune a efeitos de monstros de gelo.",
+    image: "/lovable-uploads/b5c21ad4-acff-4185-a9b6-86c751533e62.png",
+    rarity: "epic",
+    cost: 7
+  },
+  {
+    id: 80,
+    name: "Fênix de Cristal",
+    type: "monster",
+    element: "ice",
+    attack: 2700,
+    defense: 2400,
+    level: 8,
+    description: "Ave mística dos picos gelados. Revive com metade dos pontos quando destruída.",
+    image: "/lovable-uploads/9ff041c9-40e5-4ca2-8f11-2c7a9bc8b5cb.png",
+    rarity: "legendary",
+    cost: 8
+  },
+
   // Magic Cards
   {
     id: 100,

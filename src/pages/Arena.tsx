@@ -4,10 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { GameCard } from "@/components/GameCard";
 import { Card, GameState, Player } from "@/types/Card";
 import { allCards } from "@/data/cards";
-import { Heart, Zap, ArrowLeft, Swords, Shield, Crown, Sparkles, Flame, Snowflake, Skull } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Heart, Zap, ArrowLeft, Swords, Shield, Crown, Sparkles, Flame, Snowflake, Skull, Trophy } from "lucide-react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { calculateBattle, calculateBattlePoints, getAIStrategy, getElementalAdvantage } from "@/utils/battleSystem";
 
 const createInitialDeck = (): Card[] => {
   // Shuffle and take 20 cards for each player
@@ -31,9 +32,12 @@ const createPlayer = (id: string, name: string): Player => {
 export default function Arena() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
+  const missionId = searchParams.get('mission');
+  
   const [gameState, setGameState] = useState<GameState>(() => ({
     player1: createPlayer("player1", "Você"),
-    player2: createPlayer("player2", "Oponente"),
+    player2: createPlayer("player2", missionId ? "Boss da Missão" : "Oponente"),
     currentPlayer: "player1",
     phase: "draw",
     turn: 1
@@ -43,6 +47,10 @@ export default function Arena() {
   const [winner, setWinner] = useState<string | null>(null);
   const [attackingCard, setAttackingCard] = useState<number | null>(null);
   const [gameEnded, setGameEnded] = useState(false);
+  const [totalDamageDealt, setTotalDamageDealt] = useState(0);
+  const [cardsUsed, setCardsUsed] = useState<Card[]>([]);
+  const [combosUsed, setCombosUsed] = useState(0);
+  const [battlePoints, setBattlePoints] = useState(0);
 
   const currentPlayerData = gameState.currentPlayer === "player1" ? gameState.player1 : gameState.player2;
   const opponentData = gameState.currentPlayer === "player1" ? gameState.player2 : gameState.player1;
