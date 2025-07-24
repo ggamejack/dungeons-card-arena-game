@@ -32,7 +32,7 @@ const Index = () => {
             </Badge>
             
             <h1 className="text-6xl md:text-8xl font-black bg-gradient-primary bg-clip-text text-transparent animate-magical-float">
-              DUNGEONS<sup className="text-2xl md:text-3xl">®</sup>
+              JOKEMPO<sup className="text-2xl md:text-3xl">®</sup>
             </h1>
             
             <p className="text-xl md:text-2xl text-holy/90 max-w-2xl mx-auto leading-relaxed">
@@ -163,10 +163,10 @@ const Index = () => {
       <footer className="bg-muted/50 py-8 px-8 text-center">
         <div className="max-w-4xl mx-auto">
           <h3 className="text-2xl font-black mb-4 bg-gradient-primary bg-clip-text text-transparent">
-            DUNGEONS<sup>®</sup>
+            JOKEMPO<sup>®</sup>
           </h3>
           <p className="text-muted-foreground">
-            © 2024 Dungeons® - Todos os direitos reservados. Entre nas masmorras por sua própria conta e risco.
+            © 2024 Jokempo® - Todos os direitos reservados. Entre nas masmorras por sua própria conta e risco.
           </p>
         </div>
       </footer>

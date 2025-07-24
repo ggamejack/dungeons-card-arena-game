@@ -19,7 +19,7 @@ const premiumDecks = [
   },
   {
     id: "premium-shadows",
-    name: "Deck das Sombras Eternas",
+    name: "Deck das Sombras",
     description: "Criaturas das trevas com poderes sombrios",
     price: 23.99,
     cards: 15,
@@ -69,7 +69,7 @@ const newPremiumCards: Card[] = [
     defense: 13,
     level: 11,
     description: "Guardião celestial que pune os pecadores com luz divina.",
-    image: "/lovable-uploads/93e1cfb2-1a99-42de-b3f1-c70a260bd479.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/93e1cfb2-1a99-42de-b3f1-c70a260bd479.png",
     rarity: "legendary",
     cost: 14
   },
@@ -82,7 +82,7 @@ const newPremiumCards: Card[] = [
     defense: 12,
     level: 12,
     description: "Senhor supremo das sombras, corruptor de almas.",
-    image: "/lovable-uploads/9eecb997-c318-4245-8002-492ea0f546bf.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/9eecb997-c318-4245-8002-492ea0f546bf.png",
     rarity: "legendary",
     cost: 16
   },
@@ -95,7 +95,7 @@ const newPremiumCards: Card[] = [
     defense: 10,
     level: 10,
     description: "Criatura infernal que emerge das profundezas do abismo.",
-    image: "/lovable-uploads/b745b9a0-bb80-4788-92ff-04357d1d3a69.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/b745b9a0-bb80-4788-92ff-04357d1d3a69.png",
     rarity: "epic",
     cost: 13
   },
@@ -108,7 +108,7 @@ const newPremiumCards: Card[] = [
     defense: 18,
     level: 11,
     description: "Gigante ancestral das terras geladas com poder congelante.",
-    image: "/lovable-uploads/15a8d434-2b12-4b22-8537-31e198cdcdd8.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/15a8d434-2b12-4b22-8537-31e198cdcdd8.png",
     rarity: "legendary",
     cost: 14
   },
@@ -121,7 +121,7 @@ const newPremiumCards: Card[] = [
     defense: 16,
     level: 10,
     description: "Divindade lunar que controla as marés e o destino.",
-    image: "/lovable-uploads/38499ffe-dbfa-4b49-a357-8cac32af8b3c.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/38499ffe-dbfa-4b49-a357-8cac32af8b3c.png",
     rarity: "legendary",
     cost: 13
   },
@@ -134,7 +134,7 @@ const newPremiumCards: Card[] = [
     defense: 8,
     level: 9,
     description: "Ave lendária que cavalga as tempestades com velocidade divina.",
-    image: "/lovable-uploads/699b67df-94bc-415d-abb4-9d688ef5e6d1.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/699b67df-94bc-415d-abb4-9d688ef5e6d1.png",
     rarity: "epic",
     cost: 12
   },
@@ -147,7 +147,7 @@ const newPremiumCards: Card[] = [
     defense: 14,
     level: 8,
     description: "Espírito vulpino com chamas sagradas que purificam.",
-    image: "/lovable-uploads/e6a6b15b-2a22-46aa-ae00-6b2eb3c6fb65.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/e6a6b15b-2a22-46aa-ae00-6b2eb3c6fb65.png",
     rarity: "rare",
     cost: 10
   },
@@ -160,7 +160,7 @@ const newPremiumCards: Card[] = [
     defense: 20,
     level: 10,
     description: "Construto de rocha e magma com força devastadora.",
-    image: "/lovable-uploads/d80aaac7-9c5c-409c-86c1-990916520fba.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/d80aaac7-9c5c-409c-86c1-990916520fba.png",
     rarity: "epic",
     cost: 13
   },
@@ -173,7 +173,7 @@ const newPremiumCards: Card[] = [
     defense: 11,
     level: 9,
     description: "Mago negro que manipula as trevas para invocar poderes proibidos.",
-    image: "/lovable-uploads/bdeb866c-9a3f-45cb-bbbd-b8b78da78cba.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/bdeb866c-9a3f-45cb-bbbd-b8b78da78cba.png",
     rarity: "epic",
     cost: 11
   }
