@@ -6,6 +6,10 @@ export interface BattleResult {
   destroyed: boolean;
   counterDamage?: number;
   specialEffect?: string;
+  freezeEffect?: boolean;
+  healingEffect?: number;
+  energyDrain?: number;
+  multiAttack?: boolean;
 }
 
 export interface PointsCalculation {
@@ -51,7 +55,7 @@ export function canSummonCard(card: Card, currentEnergy: number): boolean {
   return currentEnergy >= card.cost;
 }
 
-// Sistema de batalha melhorado
+// Sistema de batalha melhorado com efeitos especiais
 export function calculateBattle(
   attackerCard: Card, 
   defenderCard?: Card, 
@@ -75,21 +79,54 @@ export function calculateBattle(
     destroyed: false
   };
 
-  // Atacante destrói defensor
-  if (finalAttack > defenderDefense) {
+  // Efeitos especiais baseados na descrição das cartas
+  const attackerEffects = getCardEffects(attackerCard);
+  const defenderEffects = getCardEffects(defenderCard);
+
+  // Aplicar modificadores de efeitos especiais
+  let modifiedAttack = finalAttack;
+  let modifiedDefense = defenderDefense;
+
+  // Efeitos do atacante
+  if (attackerEffects.attackBonus) {
+    modifiedAttack += attackerEffects.attackBonus;
+  }
+  if (attackerEffects.freezeAttack && attackerCard.element === 'ice') {
+    result.freezeEffect = true;
+    result.specialEffect = `${attackerCard.name} congela o oponente!`;
+  }
+  if (attackerEffects.multiAttack) {
+    result.multiAttack = true;
+    result.specialEffect = `${attackerCard.name} ataca múltiplas vezes!`;
+  }
+  if (attackerEffects.drainEnergy) {
+    result.energyDrain = 2;
+    result.specialEffect = `${attackerCard.name} drena energia do oponente!`;
+  }
+
+  // Efeitos do defensor
+  if (defenderEffects.defenseBonus) {
+    modifiedDefense += defenderEffects.defenseBonus;
+  }
+  if (defenderEffects.healing) {
+    result.healingEffect = defenderEffects.healing;
+  }
+
+  // Batalha principal
+  if (modifiedAttack > modifiedDefense) {
     result.winner = 'player';
-    result.damage = finalAttack - defenderDefense;
+    result.damage = modifiedAttack - modifiedDefense;
     result.destroyed = true;
     
-    // Efeito especial baseado no elemento
-    if (elementalMultiplier > 1.0) {
+    // Efeito especial baseado no elemento se não houver outro
+    if (!result.specialEffect && elementalMultiplier > 1.0) {
       result.specialEffect = `Vantagem elemental! ${attackerCard.element} vs ${defenderCard.element}`;
     }
   }
   // Defensor destrói atacante
-  else if (defenderDefense > finalAttack) {
+  else if (modifiedDefense > modifiedAttack) {
     result.winner = 'opponent';
-    result.counterDamage = defenderDefense - finalAttack;
+    result.counterDamage = modifiedDefense - modifiedAttack;
     result.destroyed = true;
   }
   // Empate - ambos são destruídos
@@ -99,6 +136,61 @@ export function calculateBattle(
   }
 
   return result;
+}
+
+// Analisa os efeitos especiais das cartas baseado na descrição
+export function getCardEffects(card: Card): {
+  attackBonus?: number;
+  defenseBonus?: number;
+  freezeAttack?: boolean;
+  multiAttack?: boolean;
+  drainEnergy?: boolean;
+  healing?: number;
+  directAttack?: boolean;
+} {
+  const effects: any = {};
+  const description = card.description.toLowerCase();
+
+  // Efeitos de ataque
+  if (description.includes('sacrifica') || description.includes('ganha')) {
+    effects.attackBonus = 1000;
+  }
+  if (description.includes('+500') || description.includes('aumenta')) {
+    effects.attackBonus = 500;
+  }
+  if (description.includes('+300')) {
+    effects.attackBonus = 300;
+  }
+  if (description.includes('+200')) {
+    effects.attackBonus = 200;
+  }
+
+  // Efeitos de defesa
+  if (description.includes('protege') || description.includes('imune')) {
+    effects.defenseBonus = 500;
+  }
+  if (description.includes('não pode ser destruído')) {
+    effects.defenseBonus = 1000;
+  }
+
+  // Efeitos especiais
+  if (description.includes('congela') || description.includes('gelado')) {
+    effects.freezeAttack = true;
+  }
+  if (description.includes('duas vezes') || description.includes('múltiplas')) {
+    effects.multiAttack = true;
+  }
+  if (description.includes('drena') || description.includes('energia')) {
+    effects.drainEnergy = true;
+  }
+  if (description.includes('cura') || description.includes('vida')) {
+    effects.healing = 500;
+  }
+  if (description.includes('diretamente') || description.includes('ignorando')) {
+    effects.directAttack = true;
+  }
+
+  return effects;
 }
 
 // Sistema de pontos avançado
