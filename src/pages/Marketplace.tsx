@@ -15,7 +15,7 @@ const premiumDecks = [
     price: 25.99,
     cards: 15,
     rarity: "Legendary",
-    image: "/dungeons-card-arena-game/lovable-uploads/43109396-a769-44b4-818f-1f797ee22f52.png"
+    image: "/lovable-uploads/Arcanjo.webp"
   },
   {
     id: "premium-shadows",
@@ -24,7 +24,7 @@ const premiumDecks = [
     price: 23.99,
     cards: 15,
     rarity: "Epic",
-    image: "/dungeons-card-arena-game/lovable-uploads/9eecb997-c318-4245-8002-492ea0f546bf.png"
+    image: "/lovable-uploads/Lorde infernal.webp"
   },
   {
     id: "premium-elementals",
@@ -33,149 +33,167 @@ const premiumDecks = [
     price: 29.99,
     cards: 20,
     rarity: "Legendary",
-    image: "/dungeons-card-arena-game/lovable-uploads/15a8d434-2b12-4b22-8537-31e198cdcdd8.png"
+    image: "/lovable-uploads/Aquamon.webp"
   },
   {
-    id: "premium-mythical",
-    name: "Deck dos Seres Míticos",
-    description: "Criaturas lendárias com habilidades únicas",
-    price: 35.99,
+    id: "premium-divine",
+    name: "Deck dos Seres Divinos",
+    description: "Criaturas celestiais com poderes supremos",
+    price: 39.99,
     cards: 25,
     rarity: "Mythical",
-    image: "/dungeons-card-arena-game/lovable-uploads/38499ffe-dbfa-4b49-a357-8cac32af8b3c.png"
+    image: "/lovable-uploads/Miguel.jpeg"
+  },
+  {
+    id: "premium-guardians",
+    name: "Deck dos Guardiões",
+    description: "Protetores ancestrais com defesas impenetráveis",
+    price: 32.99,
+    cards: 20,
+    rarity: "Legendary",
+    image: "/lovable-uploads/Sentinela.webp"
+  },
+  {
+    id: "premium-mystics",
+    name: "Deck dos Místicos",
+    description: "Sábios e videntes com poderes sobrenaturais",
+    price: 27.99,
+    cards: 18,
+    rarity: "Epic",
+    image: "/lovable-uploads/Sara.webp"
   }
 ];
 
-const newPremiumCards: Card[] = [
+const showcaseCards: Card[] = [
   {
-    id: 2000,
-    name: "Arcanjo Gabriel",
+    id: 4001,
+    name: "Arcanjo Supremo",
     type: "monster",
     element: "holy",
-    attack: 18,
-    defense: 15,
+    attack: 4000,
+    defense: 3500,
     level: 12,
-    description: "O mais poderoso dos arcanjos, mensageiro divino com força celestial.",
-    image: "/dungeons-card-arena-game/lovable-uploads/43109396-a769-44b4-818f-1f797ee22f52.png",
+    description: "O mais poderoso dos arcanjos, mensageiro divino supremo.",
+    image: "/lovable-uploads/Arcanjo.webp",
     rarity: "legendary",
-    cost: 15
-  },
-  {
-    id: 2001,
-    name: "Serafim da Justiça",
-    type: "monster",
-    element: "holy",
-    attack: 16,
-    defense: 13,
-    level: 11,
-    description: "Guardião celestial que pune os pecadores com luz divina.",
-    image: "/dungeons-card-arena-game/lovable-uploads/93e1cfb2-1a99-42de-b3f1-c70a260bd479.png",
-    rarity: "legendary",
-    cost: 14
-  },
-  {
-    id: 2002,
-    name: "Lorde das Trevas",
-    type: "monster",
-    element: "shadow",
-    attack: 20,
-    defense: 12,
-    level: 12,
-    description: "Senhor supremo das sombras, corruptor de almas.",
-    image: "/dungeons-card-arena-game/lovable-uploads/9eecb997-c318-4245-8002-492ea0f546bf.png",
-    rarity: "legendary",
-    cost: 16
-  },
-  {
-    id: 2003,
-    name: "Demônio do Abismo",
-    type: "monster",
-    element: "shadow",
-    attack: 17,
-    defense: 10,
-    level: 10,
-    description: "Criatura infernal que emerge das profundezas do abismo.",
-    image: "/dungeons-card-arena-game/lovable-uploads/b745b9a0-bb80-4788-92ff-04357d1d3a69.png",
-    rarity: "epic",
-    cost: 13
-  },
-  {
-    id: 2004,
-    name: "Titã do Gelo Eterno",
-    type: "monster",
-    element: "ice",
-    attack: 15,
-    defense: 18,
-    level: 11,
-    description: "Gigante ancestral das terras geladas com poder congelante.",
-    image: "/dungeons-card-arena-game/lovable-uploads/15a8d434-2b12-4b22-8537-31e198cdcdd8.png",
-    rarity: "legendary",
-    cost: 14
-  },
-  {
-    id: 2005,
-    name: "Deusa da Luna",
-    type: "monster",
-    element: "holy",
-    attack: 14,
-    defense: 16,
-    level: 10,
-    description: "Divindade lunar que controla as marés e o destino.",
-    image: "/dungeons-card-arena-game/lovable-uploads/38499ffe-dbfa-4b49-a357-8cac32af8b3c.png",
-    rarity: "legendary",
-    cost: 13
-  },
-  {
-    id: 2006,
-    name: "Águia do Trovão",
-    type: "monster",
-    element: "lightning",
-    attack: 19,
-    defense: 8,
-    level: 9,
-    description: "Ave lendária que cavalga as tempestades com velocidade divina.",
-    image: "/dungeons-card-arena-game/lovable-uploads/699b67df-94bc-415d-abb4-9d688ef5e6d1.png",
-    rarity: "epic",
     cost: 12
   },
   {
-    id: 2007,
-    name: "Raposa de Fogo Mística",
+    id: 4002,
+    name: "Miguel Arcanjo",
     type: "monster",
-    element: "fire",
-    attack: 12,
-    defense: 14,
-    level: 8,
-    description: "Espírito vulpino com chamas sagradas que purificam.",
-    image: "/dungeons-card-arena-game/lovable-uploads/e6a6b15b-2a22-46aa-ae00-6b2eb3c6fb65.png",
-    rarity: "rare",
+    element: "holy",
+    attack: 4500,
+    defense: 4000,
+    level: 12,
+    description: "O mais poderoso guerreiro celestial, líder dos exércitos divinos.",
+    image: "/lovable-uploads/Miguel.jpeg",
+    rarity: "legendary",
+    cost: 12
+  },
+  {
+    id: 4003,
+    name: "Lorde Infernal",
+    type: "monster",
+    element: "shadow",
+    attack: 4200,
+    defense: 2800,
+    level: 12,
+    description: "Senhor supremo dos infernos com poder sobre as trevas.",
+    image: "/lovable-uploads/Lorde infernal.webp",
+    rarity: "legendary",
+    cost: 12
+  },
+  {
+    id: 4004,
+    name: "Aquamon",
+    type: "monster",
+    element: "ice",
+    attack: 3500,
+    defense: 2800,
+    level: 10,
+    description: "Senhor dos oceanos profundos com poderes aquáticos divinos.",
+    image: "/lovable-uploads/Aquamon.webp",
+    rarity: "legendary",
     cost: 10
   },
   {
-    id: 2008,
-    name: "Golem de Magma",
+    id: 4005,
+    name: "Fênix Ardente",
     type: "monster",
     element: "fire",
-    attack: 16,
-    defense: 20,
-    level: 10,
-    description: "Construto de rocha e magma com força devastadora.",
-    image: "/dungeons-card-arena-game/lovable-uploads/d80aaac7-9c5c-409c-86c1-990916520fba.png",
-    rarity: "epic",
-    cost: 13
+    attack: 3800,
+    defense: 3000,
+    level: 11,
+    description: "Ave lendária das chamas eternas que renasce das cinzas.",
+    image: "/lovable-uploads/Fenix ardente.webp",
+    rarity: "legendary",
+    cost: 11
   },
   {
-    id: 2009,
-    name: "Feiticeiro das Sombras",
+    id: 4006,
+    name: "Athena, Deusa da Sabedoria",
+    type: "monster",
+    element: "holy",
+    attack: 4000,
+    defense: 3600,
+    level: 11,
+    description: "Divindade da estratégia e conhecimento, protetora dos heróis.",
+    image: "/lovable-uploads/athena.webp",
+    rarity: "legendary",
+    cost: 11
+  },
+  {
+    id: 4007,
+    name: "Terra Colossos",
+    type: "monster",
+    element: "earth",
+    attack: 4200,
+    defense: 4800,
+    level: 12,
+    description: "Gigante primordial feito da própria essência da terra.",
+    image: "/lovable-uploads/terra colosos.webp",
+    rarity: "legendary",
+    cost: 12
+  },
+  {
+    id: 4008,
+    name: "Lucifer, o Anjo Caído",
     type: "monster",
     element: "shadow",
-    attack: 13,
-    defense: 11,
-    level: 9,
-    description: "Mago negro que manipula as trevas para invocar poderes proibidos.",
-    image: "/dungeons-card-arena-game/lovable-uploads/bdeb866c-9a3f-45cb-bbbd-b8b78da78cba.png",
-    rarity: "epic",
-    cost: 11
+    attack: 5000,
+    defense: 4000,
+    level: 12,
+    description: "O mais poderoso dos anjos caídos, mestre das trevas supremas.",
+    image: "/lovable-uploads/lucifer.webp",
+    rarity: "legendary",
+    cost: 12
+  },
+  {
+    id: 4009,
+    name: "Águia Trovão",
+    type: "monster",
+    element: "lightning",
+    attack: 3600,
+    defense: 2800,
+    level: 10,
+    description: "Majestosa ave dos céus que comanda os trovões e relâmpagos.",
+    image: "/lovable-uploads/Águia trovão.webp",
+    rarity: "legendary",
+    cost: 10
+  },
+  {
+    id: 4010,
+    name: "Executor das Sombras",
+    type: "monster",
+    element: "shadow",
+    attack: 3600,
+    defense: 2800,
+    level: 10,
+    description: "Carrasco implacável que serve às forças das trevas.",
+    image: "/lovable-uploads/executor.webp",
+    rarity: "legendary",
+    cost: 10
   }
 ];
 
@@ -213,11 +231,11 @@ export default function Marketplace() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
+          <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Sparkles className="w-8 h-8 text-amber-400" />
             <h1 className="text-5xl font-bold bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 bg-clip-text text-transparent">
-              MARKETPLACE
+              JOKEMPO STORE
             </h1>
             <Sparkles className="w-8 h-8 text-amber-400" />
           </div>
@@ -288,7 +306,7 @@ export default function Marketplace() {
             Pré-visualização das Cartas
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {newPremiumCards.map((card) => (
+            {showcaseCards.map((card) => (
               <div key={card.id} className="transform hover:scale-105 transition-all duration-300">
                 <GameCard card={card} />
               </div>

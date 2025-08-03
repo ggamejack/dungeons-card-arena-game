@@ -403,7 +403,7 @@ export default function Arena() {
         
         <div className="text-center space-y-1">
           <h1 className="text-lg sm:text-3xl font-black bg-gradient-primary bg-clip-text text-transparent animate-glow">
-            DUNGEONS® ARENA
+            JOKEMPO ARENA
           </h1>
           <div className="flex items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm">
             <Badge variant="outline" className="animate-pulse text-xs">
