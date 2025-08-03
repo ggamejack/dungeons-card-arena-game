@@ -55,6 +55,27 @@ export function canSummonCard(card: Card, currentEnergy: number): boolean {
   return currentEnergy >= card.cost;
 }
 
+// Calcula o custo de energia baseado na raridade da carta
+export function getEnergyCostByRarity(rarity: string): number {
+  switch (rarity) {
+    case 'common': return Math.floor(Math.random() * 3) + 1; // 1-3
+    case 'rare': return Math.floor(Math.random() * 3) + 3; // 3-5
+    case 'epic': return Math.floor(Math.random() * 3) + 5; // 5-7
+    case 'legendary': return Math.floor(Math.random() * 4) + 7; // 7-10
+    default: return 1;
+  }
+}
+
+// Verifica se a energia está no limite máximo (10)
+export function isEnergyAtMax(currentEnergy: number): boolean {
+  return currentEnergy >= 10;
+}
+
+// Adiciona energia respeitando o limite máximo
+export function addEnergy(currentEnergy: number, amount: number): number {
+  return Math.min(currentEnergy + amount, 10);
+}
+
 // Sistema de batalha melhorado com efeitos especiais
 export function calculateBattle(
   attackerCard: Card, 

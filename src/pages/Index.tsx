@@ -5,7 +5,7 @@ import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { allCards } from "@/data/cards";
 import { useNavigate } from "react-router-dom";
 import { Swords, Sparkles, Crown, Zap, Trophy } from "lucide-react";
-import heroImage from "@/assets/game-layout-background.jpg";
+import heroImage from "@/assets/new-game-background.jpg";
 import { Navigation } from "@/components/Navigation";
 
 const Index = () => {

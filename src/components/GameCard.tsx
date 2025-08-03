@@ -33,8 +33,8 @@ const rarityColors = {
   common: "border-muted",
   uncommon: "border-accent",
   rare: "border-primary",
-  epic: "border-secondary",
-  legendary: "border-accent bg-gradient-holy"
+  epic: "border-purple-500",
+  legendary: "border-yellow-400"
 };
 
 export function GameCard({ card, isHovered, onClick, className, style }: GameCardProps) {
@@ -183,17 +183,17 @@ export function GameCard({ card, isHovered, onClick, className, style }: GameCar
         </div>
       </div>
 
-      {/* Legendary Glow Effect */}
+      {/* Legendary Golden Border Effect */}
       {card.rarity === "legendary" && (
-        <div className="absolute inset-0 pointer-events-none animate-energy-pulse opacity-20">
-          <div className="w-full h-full bg-gradient-holy rounded-xl"></div>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="w-full h-full rounded-xl border-2 border-yellow-400 shadow-[0_0_20px_rgba(255,215,0,0.6)] animate-pulse"></div>
         </div>
       )}
 
-      {/* Epic Border Effect */}
+      {/* Epic Purple Border Effect */}
       {card.rarity === "epic" && (
-        <div className="absolute inset-0 pointer-events-none opacity-30">
-          <div className="w-full h-full rounded-xl border-2 border-gradient-to-r from-purple-400 via-pink-400 to-purple-400 animate-glow"></div>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="w-full h-full rounded-xl border-2 border-purple-500 shadow-[0_0_20px_rgba(147,51,234,0.6)] animate-pulse"></div>
         </div>
       )}
 

@@ -29,7 +29,7 @@ export const gameCards: Card[] = [
     description: "Renasce com metade do ATK após ser destruída.",
     image: phoenixScarlet,
     rarity: "legendary",
-    cost: 6
+    cost: 8
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ export const gameCards: Card[] = [
     description: "Reduz o ATK de monstros de fogo em 1000.",
     image: leviathanAbyss,
     rarity: "legendary",
-    cost: 8
+    cost: 9
   },
   {
     id: 3,
@@ -55,7 +55,7 @@ export const gameCards: Card[] = [
     description: "Sacrifica 1 carta do campo para ganhar +1000 ATK até o fim do turno.",
     image: demonEternalNight,
     rarity: "legendary",
-    cost: 9
+    cost: 10
   },
   {
     id: 4,
@@ -68,7 +68,7 @@ export const gameCards: Card[] = [
     description: "Protege monstros aliados por 1 turno.",
     image: guardianAngel,
     rarity: "legendary",
-    cost: 7
+    cost: 8
   },
   {
     id: 5,
@@ -81,7 +81,7 @@ export const gameCards: Card[] = [
     description: "Não pode ser destruído por monstros com ATK < 2000.",
     image: crystalGolem,
     rarity: "legendary",
-    cost: 7
+    cost: 8
   },
 
   // EXISTING LEGENDARY DEFENDERS
@@ -96,7 +96,7 @@ export const gameCards: Card[] = [
     description: "Guardião colossal das montanhas sagradas.",
     image: "/dungeons-card-arena-game/lovable-uploads/3833f380-167f-4450-8c55-edd75f89573a.png",
     rarity: "legendary",
-    cost: 7
+    cost: 8
   },
   {
     id: 7,
@@ -109,7 +109,7 @@ export const gameCards: Card[] = [
     description: "Senhor supremo das dimensões sombrias.",
     image: "/dungeons-card-arena-game/lovable-uploads/517299d0-5067-485f-a545-b3c3f3310e94.png",
     rarity: "legendary",
-    cost: 7
+    cost: 9
   },
 
   // FIRE ELEMENT MONSTERS
@@ -124,7 +124,7 @@ export const gameCards: Card[] = [
     description: "Destrói uma carta de auxílio inimiga ao atacar.",
     image: "/dungeons-card-arena-game/lovable-uploads/896816f6-7b9a-4f82-9500-6ec8d0310dbf.png",
     rarity: "epic",
-    cost: 7
+    cost: 6
   },
   {
     id: 12,
@@ -521,36 +521,76 @@ export const gameCards: Card[] = [
     cost: 4
   },
 
-  // Trap Cards
+  // Trap Cards - UPDATED WITH NEW IMAGES
   {
     id: 200,
-    name: "Armadilha Explosiva",
+    name: "Floresta Mística",
     type: "trap",
     level: 3,
-    description: "Quando um monstro ataca, ele recebe 600 de dano.",
-    image: "",
+    description: "Quando um monstro ataca, causa 300 de dano ao atacante.",
+    image: "/lovable-uploads/fe8c250f-964d-49fa-8ac7-276ab23b089e.png",
     rarity: "common",
     cost: 2
   },
   {
     id: 201,
-    name: "Espelho Mágico",
+    name: "Esferas do Cosmos",
     type: "trap",
     level: 4,
-    description: "Reflete o próximo feitiço de volta ao oponente.",
-    image: "",
+    description: "Impede que monstros de nível 5 ou menos ataquem por 1 turno.",
+    image: "/lovable-uploads/8f6be117-e8dc-4d82-9caf-6b43a0e614bd.png",
     rarity: "uncommon",
     cost: 3
   },
   {
     id: 202,
-    name: "Prisão das Sombras",
+    name: "Anjo da Luz Sagrada",
     type: "trap",
     level: 5,
-    description: "Impede um monstro de atacar por 2 turnos.",
-    image: "",
+    description: "Reflete o próximo ataque mágico de volta ao oponente.",
+    image: "/lovable-uploads/456020f3-6b96-4305-8597-ce821f220090.png",
     rarity: "rare",
     cost: 4
+  },
+  {
+    id: 203,
+    name: "Portal das Dimensões",
+    type: "trap",
+    level: 7,
+    description: "Remove todas as cartas do campo de batalha.",
+    image: "/lovable-uploads/bc4be0bc-a544-46f6-9a1c-ef601dc7ee74.png",
+    rarity: "epic",
+    cost: 5
+  },
+  {
+    id: 204,
+    name: "Consciência Cósmica",
+    type: "trap",
+    level: 8,
+    description: "Controla a mente do próximo monstro invocado pelo oponente.",
+    image: "/lovable-uploads/a45b08a7-6b88-4142-baf6-d2e04e25ef83.png",
+    rarity: "epic",
+    cost: 6
+  },
+  {
+    id: 205,
+    name: "Mestre do Tempo",
+    type: "trap",
+    level: 9,
+    description: "Reverte o último turno do oponente, cancelando suas ações.",
+    image: "/lovable-uploads/3b71df27-823f-45a7-82a5-07a331b26fbc.png",
+    rarity: "legendary",
+    cost: 8
+  },
+  {
+    id: 206,
+    name: "Asas da Transcendência",
+    type: "trap",
+    level: 10,
+    description: "Permite que todos os seus monstros ataquem diretamente por 1 turno.",
+    image: "/lovable-uploads/b2af60e8-46fa-4f30-a562-891d8d111ba2.png",
+    rarity: "legendary",
+    cost: 9
   }
 ];
 
