@@ -30,11 +30,19 @@ const elementColors = {
 };
 
 const rarityColors = {
-  common: "border-muted",
+  common: "border-green-500",
   uncommon: "border-accent",
-  rare: "border-primary",
+  rare: "border-blue-500",
   epic: "border-purple-500",
   legendary: "border-yellow-400"
+};
+
+const rarityGlowEffects = {
+  common: "shadow-[0_0_0_2px_rgb(34,197,94,0.5)] after:absolute after:inset-0 after:rounded-xl after:border-2 after:border-green-500 after:opacity-0 after:transition-opacity after:duration-300 hover:after:opacity-100",
+  uncommon: "shadow-[0_0_0_2px_rgb(168,85,247,0.3)]",
+  rare: "shadow-[0_0_0_2px_rgb(59,130,246,0.5)] after:absolute after:inset-0 after:rounded-xl after:border-2 after:border-blue-500 after:opacity-0 after:transition-opacity after:duration-300 hover:after:opacity-100",
+  epic: "shadow-[0_0_0_2px_rgb(147,51,234,0.6)] after:absolute after:inset-0 after:rounded-xl after:border-2 after:border-purple-500 after:opacity-60 after:transition-opacity after:duration-300 hover:after:opacity-100",
+  legendary: "shadow-[0_0_0_2px_rgb(250,204,21,0.7)] after:absolute after:inset-0 after:rounded-xl after:border-2 after:border-yellow-400 after:opacity-70 after:transition-opacity after:duration-300 hover:after:opacity-100 after:animate-pulse"
 };
 
 export function GameCard({ card, isHovered, onClick, className, style }: GameCardProps) {
@@ -55,8 +63,9 @@ export function GameCard({ card, isHovered, onClick, className, style }: GameCar
         "relative w-48 h-72 rounded-xl border-2 bg-card text-card-foreground transition-all duration-500 cursor-pointer overflow-hidden group",
         "shadow-lg hover:shadow-2xl",
         rarityColors[card.rarity],
-        isHovered && "scale-110 shadow-mystical animate-glow z-20 border-accent",
-        !isHovered && "hover:scale-105 hover:shadow-mystical hover:border-primary/50",
+        rarityGlowEffects[card.rarity],
+        isHovered && "scale-110 z-20 border-accent",
+        !isHovered && "hover:scale-105",
         card.rarity === "legendary" && "animate-magical-float",
         card.rarity === "epic" && "hover:animate-energy-pulse",
         className
@@ -183,26 +192,6 @@ export function GameCard({ card, isHovered, onClick, className, style }: GameCar
         </div>
       </div>
 
-      {/* Legendary Golden Border Effect */}
-      {card.rarity === "legendary" && (
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="w-full h-full rounded-xl border-2 border-yellow-400 shadow-[0_0_20px_rgba(255,215,0,0.6)] animate-pulse"></div>
-        </div>
-      )}
-
-      {/* Epic Purple Border Effect */}
-      {card.rarity === "epic" && (
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="w-full h-full rounded-xl border-2 border-purple-500 shadow-[0_0_20px_rgba(147,51,234,0.6)] animate-pulse"></div>
-        </div>
-      )}
-
-      {/* Rare Shimmer Effect */}
-      {card.rarity === "rare" && (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-2 -left-2 w-4 h-4 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full opacity-50 animate-magical-float"></div>
-        </div>
-      )}
 
       {/* Interactive Hover Effect */}
       <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
