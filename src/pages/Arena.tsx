@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { GameCard } from "@/components/GameCard";
+import DragDropBattleField from "@/components/DragDropBattleField";
 import { Card, GameState, Player } from "@/types/Card";
 import { allCards } from "@/data/cards";
 import { Heart, Zap, ArrowLeft, Swords, Shield, Crown, Sparkles, Flame, Snowflake, Skull, Trophy } from "lucide-react";
@@ -92,9 +93,9 @@ export default function Arena() {
       
       // Adiciona energia ao jogador que vai jogar
       if (nextPlayer === "player1") {
-        newState.player1.energy = Math.min(newState.player1.energy + 1, 12);
+        newState.player1.energy = Math.min(newState.player1.energy + 1, 10);
       } else {
-        newState.player2.energy = Math.min(newState.player2.energy + 1, 12);
+        newState.player2.energy = Math.min(newState.player2.energy + 1, 10);
       }
       
       return {
@@ -266,7 +267,7 @@ export default function Arena() {
         } else {
           // AI plays a random card from hand
           const playableCards = gameState.player2.hand.filter(card => 
-            card.type === "monster" && gameState.player2.field.length < 5
+            card.type === "monster" && gameState.player2.field.length < 5 && canSummonCard(card, gameState.player2.energy)
           );
           
           if (playableCards.length > 0) {
@@ -463,91 +464,30 @@ export default function Arena() {
                 <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-yellow-400" />
                 {opponentData.energy}
               </Badge>
-              <Badge variant="outline" className="text-xs sm:text-lg px-2 sm:px-4 py-1 sm:py-2">
-                {opponentData.deck.length}
-              </Badge>
-            </div>
-          </div>
-          
-          {/* Opponent Field - Mobile Optimized */}
-          <div className="min-h-20 sm:min-h-32 border-2 border-dashed border-destructive/30 rounded-xl p-2 sm:p-6 bg-destructive/5 backdrop-blur-sm relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-destructive/5 to-transparent pointer-events-none"></div>
-            <div className="relative z-10">
-              <h3 className="text-xs sm:text-sm font-bold text-destructive/80 mb-2 sm:mb-4 flex items-center gap-1 sm:gap-2">
-                <Swords className="w-3 h-3 sm:w-4 sm:h-4" />
-                CAMPO OPONENTE
-              </h3>
-              <div className="flex gap-1 sm:gap-3 flex-wrap justify-center">
-                {opponentData.field.map((card, index) => (
-                  <div 
-                    key={`${card.id}-${index}`}
-                    className={`animate-scale-in relative transform transition-all duration-500 hover:scale-110 cursor-pointer ${
-                      attackingCard === card.id ? 'animate-pulse scale-110 border-2 sm:border-4 border-red-500 shadow-xl sm:shadow-2xl shadow-red-500/80' : ''
-                    }`}
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                    onClick={() => handleOpponentFieldClick(card)}
-                  >
-                    <GameCard 
-                      card={card} 
-                      className="transform transition-all duration-300 shadow-lg hover:shadow-destructive/50 scale-50 sm:scale-75"
-                      onClick={() => handleOpponentFieldClick(card)}
-                    />
-                  </div>
-                ))}
-                {opponentData.field.length === 0 && selectedCard && (
-                  <div className="flex items-center justify-center h-20 sm:h-32 w-full">
-                    <Button
-                      variant="destructive"
-                      onClick={handleDirectAttack}
-                      className="animate-pulse text-xs sm:text-sm"
-                    >
-                      <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                      Ataque Direto
-                    </Button>
-                  </div>
-                )}
-              </div>
             </div>
           </div>
         </div>
 
-        {/* Player Field - Mobile Optimized */}
-        <div className="min-h-20 sm:min-h-32 border-2 border-dashed border-primary/30 rounded-xl p-2 sm:p-6 bg-primary/5 backdrop-blur-sm relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none"></div>
-          <div className="relative z-10">
-            <h3 className="text-xs sm:text-sm font-bold text-primary/80 mb-2 sm:mb-4 flex items-center gap-1 sm:gap-2">
-              <Shield className="w-3 h-3 sm:w-4 sm:h-4" />
-              SEU CAMPO
-            </h3>
-            <div className="flex gap-1 sm:gap-3 flex-wrap justify-center">
-              {currentPlayerData.field.map((card, index) => (
-                <div 
-                  key={`${card.id}-${index}`}
-                  className={`animate-scale-in relative transform transition-all duration-500 hover:scale-110 cursor-pointer ${
-                    selectedCard?.id === card.id ? 'scale-110 border-2 sm:border-4 border-accent shadow-xl sm:shadow-2xl shadow-accent/80' : ''
-                  } ${
-                    attackingCard === card.id ? 'animate-pulse scale-110 border-2 sm:border-4 border-yellow-500 shadow-xl sm:shadow-2xl shadow-yellow-500/80' : ''
-                  }`}
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                  onClick={() => handleFieldCardClick(card)}
-                >
-                  <GameCard 
-                    card={card} 
-                    className="transform transition-all duration-300 shadow-lg hover:shadow-primary/50 scale-50 sm:scale-75"
-                    onClick={() => handleFieldCardClick(card)}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Enhanced Drag & Drop Battle Field */}
+        <div className="bg-card/30 backdrop-blur-sm rounded-2xl border border-border/50 p-4 animate-fade-in">
+          <DragDropBattleField
+            playerHand={currentPlayerData.hand}
+            playerField={currentPlayerData.field}
+            opponentField={opponentData.field}
+            onCardPlayed={summonCard}
+            onCardAttack={attack}
+            onDirectAttack={(card) => attack(card)}
+            isPlayerTurn={gameState.currentPlayer === "player1"}
+            canPlayCard={(card) => canSummonCard(card, currentPlayerData.energy) && currentPlayerData.field.length < 5}
+          />
         </div>
 
-        {/* Player Area - Mobile Optimized */}
-        <div className="space-y-2 sm:space-y-4">
+        {/* Player Status - Mobile Optimized */}
+        <div className="space-y-2 sm:space-y-4 animate-fade-in">
           <div className="flex items-center justify-between p-2 sm:p-4 bg-primary/10 rounded-xl border border-primary/20">
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center animate-pulse">
-                <Heart className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
+                <Crown className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
                 <h2 className="text-sm sm:text-xl font-bold text-primary">
@@ -572,65 +512,67 @@ export default function Arena() {
                 {currentPlayerData.hand.length}
               </Badge>
               <Badge variant="outline" className="text-xs sm:text-lg px-2 sm:px-4 py-1 sm:py-2">
-                <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-yellow-400" />
-                {currentPlayerData.energy}
+                <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-yellow-400 animate-pulse" />
+                {currentPlayerData.energy}/10
               </Badge>
-              <Badge variant="outline" className="text-xs sm:text-lg px-2 sm:px-4 py-1 sm:py-2">
-                {currentPlayerData.deck.length}
-              </Badge>
-            </div>
-          </div>
-          
-          {/* Player Hand - Mobile Optimized */}
-          <div className="p-2 sm:p-4 bg-card/80 rounded-xl border border-border/50 backdrop-blur-sm">
-            <h3 className="text-xs sm:text-sm font-bold text-foreground/80 mb-2 sm:mb-4 flex items-center gap-1 sm:gap-2">
-              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
-              SUA MÃO
-            </h3>
-            <div className="flex gap-1 sm:gap-2 overflow-x-auto pb-2 sm:pb-4 px-1">
-              {currentPlayerData.hand.map((card, index) => (
-                <div 
-                  key={`hand-${card.id}-${index}`}
-                  className="flex-shrink-0 animate-scale-in cursor-pointer transform transition-all duration-300 hover:scale-105"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                  onClick={() => handleHandCardClick(card)}
-                >
-                  <GameCard 
-                    card={card} 
-                    className="shadow-lg hover:shadow-accent/50 scale-50 sm:scale-75"
-                    onClick={() => handleHandCardClick(card)}
-                  />
-                </div>
-              ))}
             </div>
           </div>
         </div>
 
-        {/* Action Buttons - Mobile Optimized */}
-        <div className="flex justify-center gap-2 sm:gap-4 pb-4">
-          <Button
-            onClick={drawCard}
-            disabled={gameState.phase !== "draw" || gameState.currentPlayer !== "player1"}
-            variant="magical"
-            size="sm"
-            className="text-xs sm:text-sm px-3 sm:px-6 py-2"
-          >
-            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-            <span className="hidden sm:inline">Comprar Carta</span>
-            <span className="sm:hidden">Comprar</span>
-          </Button>
+        {/* Controls - Mobile Optimized */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 animate-fade-in">
+          {gameState.phase === "draw" && gameState.currentPlayer === "player1" && (
+            <Button 
+              onClick={drawCard}
+              size="lg"
+              className="w-full sm:w-auto bg-gradient-primary hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary-foreground/90 shadow-lg transform hover:scale-105 transition-all duration-300"
+            >
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+              <span className="text-sm sm:text-base">Comprar Carta</span>
+            </Button>
+          )}
           
-          <Button
-            onClick={endTurn}
-            disabled={gameState.currentPlayer !== "player1"}
-            variant="destructive"
-            size="sm"
-            className="text-xs sm:text-sm px-3 sm:px-6 py-2"
-          >
-            <Swords className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-            <span className="hidden sm:inline">Finalizar Turno</span>
-            <span className="sm:hidden">Finalizar</span>
-          </Button>
+          {gameState.currentPlayer === "player1" && gameState.phase !== "draw" && (
+            <Button 
+              onClick={endTurn}
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto border-accent/50 hover:bg-accent/10 shadow-lg transform hover:scale-105 transition-all duration-300"
+            >
+              <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+              <span className="text-sm sm:text-base">Finalizar Turno</span>
+            </Button>
+          )}
+
+          {/* Direct Attack Button - only show when opponent has no monsters */}
+          {gameState.currentPlayer === "player1" && selectedCard && opponentData.field.length === 0 && (
+            <Button 
+              onClick={handleDirectAttack}
+              variant="destructive"
+              size="lg"
+              className="w-full sm:w-auto animate-glow shadow-lg transform hover:scale-105 transition-all duration-300"
+            >
+              <Swords className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+              <span className="text-sm sm:text-base">Ataque Direto</span>
+            </Button>
+          )}
+        </div>
+
+        {/* Game Info */}
+        <div className="text-center text-xs sm:text-sm text-muted-foreground animate-fade-in">
+          {gameState.currentPlayer === "player1" ? (
+            <p className="flex items-center justify-center gap-2">
+              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-primary animate-pulse" />
+              <span>Seu turno! Arraste cartas para o campo de batalha</span>
+              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-primary animate-pulse" />
+            </p>
+          ) : (
+            <p className="flex items-center justify-center gap-2">
+              <Skull className="w-3 h-3 sm:w-4 sm:h-4 text-destructive animate-pulse" />
+              <span>Turno do oponente...</span>
+              <Skull className="w-3 h-3 sm:w-4 sm:h-4 text-destructive animate-pulse" />
+            </p>
+          )}
         </div>
       </div>
 
