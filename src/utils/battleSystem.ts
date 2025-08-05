@@ -66,6 +66,18 @@ export function getEnergyCostByRarity(rarity: string): number {
   }
 }
 
+// Calcula a energia inicial baseada no turno (sistema progressivo)
+export function getProgressiveEnergy(turn: number): number {
+  const baseEnergy = 3;
+  const additionalEnergy = Math.floor((turn - 1) / 3);
+  return Math.min(baseEnergy + additionalEnergy, 10);
+}
+
+// Verifica se pode usar energia acumulada
+export function canAccumulateEnergy(currentEnergy: number, maxEnergy: number): boolean {
+  return currentEnergy < maxEnergy;
+}
+
 // Verifica se a energia está no limite máximo (10)
 export function isEnergyAtMax(currentEnergy: number): boolean {
   return currentEnergy >= 10;

@@ -3,13 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { GameCard } from "@/components/GameCard";
 import DragDropBattleField from "@/components/DragDropBattleField";
+import { TurnBasedBattleSystem } from "@/components/TurnBasedBattleSystem";
+import { ComboSystem } from "@/components/ComboSystem";
 import { Card, GameState, Player } from "@/types/Card";
 import { allCards } from "@/data/cards";
 import { Heart, Zap, ArrowLeft, Swords, Shield, Crown, Sparkles, Flame, Snowflake, Skull, Trophy } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
-import { calculateBattle, calculateBattlePoints, getAIStrategy, getElementalAdvantage, canSummonCard } from "@/utils/battleSystem";
+import { calculateBattle, calculateBattlePoints, getAIStrategy, getElementalAdvantage, canSummonCard, getProgressiveEnergy } from "@/utils/battleSystem";
 import { Navigation } from "@/components/Navigation";
 
 const createInitialDeck = (): Card[] => {
@@ -23,8 +25,8 @@ const createPlayer = (id: string, name: string): Player => {
   return {
     id,
     name,
-    health: 4000,
-    energy: 1,
+    health: 30, // Sistema de batalha com 30 HP
+    energy: 3, // Energia inicial de 3
     hand: deck.slice(0, 5),
     deck: deck.slice(5),
     field: [],
@@ -54,6 +56,8 @@ export default function Arena() {
   const [cardsUsed, setCardsUsed] = useState<Card[]>([]);
   const [combosUsed, setCombosUsed] = useState(0);
   const [battlePoints, setBattlePoints] = useState(0);
+  const [battleMode, setBattleMode] = useState<'classic' | 'advanced'>('advanced');
+  const [activeEffects, setActiveEffects] = useState<any[]>([]);
 
   const currentPlayerData = gameState.currentPlayer === "player1" ? gameState.player1 : gameState.player2;
   const opponentData = gameState.currentPlayer === "player1" ? gameState.player2 : gameState.player1;
@@ -90,25 +94,28 @@ export default function Arena() {
     setGameState(prev => {
       const newState = { ...prev };
       const nextPlayer = prev.currentPlayer === "player1" ? "player2" : "player1";
+      const newTurn = prev.currentPlayer === "player2" ? prev.turn + 1 : prev.turn;
       
-      // Adiciona energia ao jogador que vai jogar
+      // Sistema de energia progressiva
       if (nextPlayer === "player1") {
-        newState.player1.energy = Math.min(newState.player1.energy + 1, 10);
+        const progressiveEnergy = getProgressiveEnergy(newTurn);
+        newState.player1.energy = Math.min(newState.player1.energy + progressiveEnergy, 10);
       } else {
-        newState.player2.energy = Math.min(newState.player2.energy + 1, 10);
+        const progressiveEnergy = getProgressiveEnergy(newTurn);
+        newState.player2.energy = Math.min(newState.player2.energy + progressiveEnergy, 10);
       }
       
       return {
         ...newState,
         currentPlayer: nextPlayer,
         phase: "draw",
-        turn: prev.currentPlayer === "player2" ? prev.turn + 1 : prev.turn
+        turn: newTurn
       };
     });
 
     toast({
       title: "🔄 Turno Finalizado",
-      description: gameState.currentPlayer === "player1" ? "Turno do oponente" : "Seu turno",
+      description: `${gameState.currentPlayer === "player1" ? "Turno do oponente" : "Seu turno"} - Energia: ${getProgressiveEnergy(gameState.turn + 1)}`,
     });
   };
 
@@ -443,12 +450,12 @@ export default function Arena() {
                   {opponentData.name}
                 </h2>
                 <div className="flex items-center gap-1 sm:gap-2">
-                  <div className="w-16 sm:w-32 h-1 sm:h-2 bg-destructive/20 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-destructive to-destructive/80 transition-all duration-500 animate-glow"
-                      style={{ width: `${(opponentData.health / 4000) * 100}%` }}
-                    ></div>
-                  </div>
+                   <div className="w-16 sm:w-32 h-1 sm:h-2 bg-destructive/20 rounded-full overflow-hidden">
+                     <div 
+                       className="h-full bg-gradient-to-r from-destructive to-destructive/80 transition-all duration-500 animate-glow"
+                       style={{ width: `${(opponentData.health / 30) * 100}%` }}
+                     ></div>
+                   </div>
                   <span className="text-xs sm:text-lg font-bold text-destructive">
                     {opponentData.health} HP
                   </span>
@@ -468,17 +475,62 @@ export default function Arena() {
           </div>
         </div>
 
-        {/* Enhanced Drag & Drop Battle Field */}
+        {/* Advanced Turn-Based Battle System */}
         <div className="bg-card/30 backdrop-blur-sm rounded-2xl border border-border/50 p-4 animate-fade-in">
-          <DragDropBattleField
-            playerHand={currentPlayerData.hand}
-            playerField={currentPlayerData.field}
-            opponentField={opponentData.field}
-            onCardPlayed={summonCard}
-            onCardAttack={attack}
-            onDirectAttack={(card) => attack(card)}
-            isPlayerTurn={gameState.currentPlayer === "player1"}
-            canPlayCard={(card) => canSummonCard(card, currentPlayerData.energy) && currentPlayerData.field.length < 5}
+          {battleMode === 'advanced' ? (
+            <TurnBasedBattleSystem
+              player={currentPlayerData}
+              opponent={opponentData}
+              currentPlayer={gameState.currentPlayer as 'player1' | 'player2'}
+              phase={gameState.phase}
+              turn={gameState.turn}
+              onPlayCard={(card) => {
+                summonCard(card);
+                setCardsUsed(prev => [...prev, card]);
+              }}
+              onAttack={(attacker, target) => {
+                attack(attacker, target);
+                setTotalDamageDealt(prev => prev + (attacker.attack || 0));
+              }}
+              onEndTurn={endTurn}
+              onDrawCard={drawCard}
+            />
+          ) : (
+            <DragDropBattleField
+              playerHand={currentPlayerData.hand}
+              playerField={currentPlayerData.field}
+              opponentField={opponentData.field}
+              onCardPlayed={summonCard}
+              onCardAttack={attack}
+              onDirectAttack={(card) => attack(card)}
+              isPlayerTurn={gameState.currentPlayer === "player1"}
+              canPlayCard={(card) => canSummonCard(card, currentPlayerData.energy) && currentPlayerData.field.length < 5}
+            />
+          )}
+        </div>
+
+        {/* Combo System */}
+        <div className="bg-card/20 backdrop-blur-sm rounded-xl border border-border/30 p-3 animate-fade-in">
+          <ComboSystem
+            cardsPlayed={cardsUsed}
+            onComboActivated={(combo) => {
+              setCombosUsed(prev => prev + 1);
+              
+              // Apply combo effects
+              if (combo.effect.type === 'heal') {
+                setGameState(prev => {
+                  const newState = { ...prev };
+                  newState.player1.health = Math.min(newState.player1.health + combo.effect.value, 30);
+                  return newState;
+                });
+              } else if (combo.effect.type === 'energyBoost') {
+                setGameState(prev => {
+                  const newState = { ...prev };
+                  newState.player1.energy = Math.min(newState.player1.energy + combo.effect.value, 10);
+                  return newState;
+                });
+              }
+            }}
           />
         </div>
 
@@ -494,12 +546,12 @@ export default function Arena() {
                   {currentPlayerData.name}
                 </h2>
                 <div className="flex items-center gap-1 sm:gap-2">
-                  <div className="w-16 sm:w-32 h-1 sm:h-2 bg-primary/20 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-primary to-primary/80 transition-all duration-500 animate-glow"
-                      style={{ width: `${(currentPlayerData.health / 4000) * 100}%` }}
-                    ></div>
-                  </div>
+                   <div className="w-16 sm:w-32 h-1 sm:h-2 bg-primary/20 rounded-full overflow-hidden">
+                     <div 
+                       className="h-full bg-gradient-to-r from-primary to-primary/80 transition-all duration-500 animate-glow"
+                       style={{ width: `${(currentPlayerData.health / 30) * 100}%` }}
+                     ></div>
+                   </div>
                   <span className="text-xs sm:text-lg font-bold text-primary">
                     {currentPlayerData.health} HP
                   </span>
@@ -519,43 +571,26 @@ export default function Arena() {
           </div>
         </div>
 
-        {/* Controls - Mobile Optimized */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 animate-fade-in">
-          {gameState.phase === "draw" && gameState.currentPlayer === "player1" && (
-            <Button 
-              onClick={drawCard}
-              size="lg"
-              className="w-full sm:w-auto bg-gradient-primary hover:bg-gradient-to-r hover:from-primary/90 hover:to-primary-foreground/90 shadow-lg transform hover:scale-105 transition-all duration-300"
+        {/* Battle Mode Toggle */}
+        <div className="flex justify-center animate-fade-in">
+          <div className="flex items-center gap-2 bg-card/50 rounded-lg p-2 border border-border/30">
+            <Button
+              variant={battleMode === 'classic' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setBattleMode('classic')}
+              className="text-xs"
             >
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-              <span className="text-sm sm:text-base">Comprar Carta</span>
+              Clássico
             </Button>
-          )}
-          
-          {gameState.currentPlayer === "player1" && gameState.phase !== "draw" && (
-            <Button 
-              onClick={endTurn}
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto border-accent/50 hover:bg-accent/10 shadow-lg transform hover:scale-105 transition-all duration-300"
+            <Button
+              variant={battleMode === 'advanced' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setBattleMode('advanced')}
+              className="text-xs"
             >
-              <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-              <span className="text-sm sm:text-base">Finalizar Turno</span>
+              Avançado
             </Button>
-          )}
-
-          {/* Direct Attack Button - only show when opponent has no monsters */}
-          {gameState.currentPlayer === "player1" && selectedCard && opponentData.field.length === 0 && (
-            <Button 
-              onClick={handleDirectAttack}
-              variant="destructive"
-              size="lg"
-              className="w-full sm:w-auto animate-glow shadow-lg transform hover:scale-105 transition-all duration-300"
-            >
-              <Swords className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-              <span className="text-sm sm:text-base">Ataque Direto</span>
-            </Button>
-          )}
+          </div>
         </div>
 
         {/* Game Info */}
