@@ -17,10 +17,142 @@ const crystalGolem = "/dungeons-card-arena-game/lovable-uploads/15a8d434-2b12-4b
 const meteorRain = "/dungeons-card-arena-game/lovable-uploads/38499ffe-dbfa-4b49-a357-8cac32af8b3c.png";
 
 export const gameCards: Card[] = [
-  // LEGENDARY MONSTERS BASED ON DETAILED PROMPTS
+  // NEW LEGENDARY MONSTERS FROM UPLOADED IMAGES
   {
     id: 1,
-    name: "Fênix Escarlate",
+    name: "Senhor Infernal das Chamas",
+    type: "monster",
+    element: "fire",
+    attack: 3200,
+    defense: 2400,
+    level: 10,
+    description: "Invoca chamas eternas que queimam todos os inimigos por 2 turnos.",
+    image: "/lovable-uploads/aa60833c-1a1d-42f9-8a5a-623c2680dd66.png",
+    rarity: "legendary",
+    cost: 10
+  },
+  {
+    id: 2,
+    name: "Guardião da Natureza Ancestral",
+    type: "monster",
+    element: "earth",
+    attack: 2600,
+    defense: 3200,
+    level: 9,
+    description: "Regenera 500 HP por turno e invoca criaturas da floresta para defender.",
+    image: "/lovable-uploads/95d7f334-3ad5-4bf7-9369-97c8d3b6f1f5.png",
+    rarity: "legendary",
+    cost: 9
+  },
+  {
+    id: 3,
+    name: "Mestre das Tempestades",
+    type: "monster",
+    element: "lightning",
+    attack: 2900,
+    defense: 2100,
+    level: 8,
+    description: "Ataques com raio causam dano em área a todos os inimigos.",
+    image: "/lovable-uploads/bf06f617-03b4-4674-9ba0-1ffec83d30e9.png",
+    rarity: "legendary",
+    cost: 8
+  },
+  {
+    id: 4,
+    name: "Ceifador das Trevas",
+    type: "monster",
+    element: "shadow",
+    attack: 3100,
+    defense: 1900,
+    level: 9,
+    description: "Drena energia do oponente a cada ataque bem-sucedido.",
+    image: "/lovable-uploads/58783f01-6f72-4528-9187-8eff513ef019.png",
+    rarity: "legendary",
+    cost: 9
+  },
+  {
+    id: 5,
+    name: "Serafim da Melodia Divina",
+    type: "monster",
+    element: "holy",
+    attack: 2400,
+    defense: 2800,
+    level: 8,
+    description: "Cura aliados e aumenta seus atributos com música celestial.",
+    image: "/lovable-uploads/1cd9c2fa-ff6a-415f-a695-40de090909ff.png",
+    rarity: "legendary",
+    cost: 8
+  },
+  {
+    id: 6,
+    name: "Arquidemônio do Apocalipse",
+    type: "monster",
+    element: "shadow",
+    attack: 3500,
+    defense: 2500,
+    level: 10,
+    description: "Invoca o fim dos tempos, causando dano massivo a tudo no campo.",
+    image: "/lovable-uploads/93bf7b5f-9438-4cdb-8b6b-394c24d511ce.png",
+    rarity: "legendary",
+    cost: 10
+  },
+  {
+    id: 7,
+    name: "Guerreiro dos Ossos Sagrados",
+    type: "monster",
+    element: "shadow",
+    attack: 2700,
+    defense: 2300,
+    level: 8,
+    description: "Ressuscita criaturas do cemitério para lutar ao seu lado.",
+    image: "/lovable-uploads/976013e0-3279-4109-a272-e0c28cefb039.png",
+    rarity: "epic",
+    cost: 7
+  },
+  {
+    id: 8,
+    name: "Gigante Bárbaro das Caveiras",
+    type: "monster",
+    element: "shadow",
+    attack: 2800,
+    defense: 2600,
+    level: 9,
+    description: "Fica mais forte conforme derrota inimigos, ganhando +200 ATK por vitória.",
+    image: "/lovable-uploads/8aa6924a-e2f1-4bd3-9b47-f097615ab4fd.png",
+    rarity: "epic",
+    cost: 8
+  },
+  {
+    id: 9,
+    name: "Morte Sangrenta Alada",
+    type: "monster",
+    element: "shadow",
+    attack: 2900,
+    defense: 1800,
+    level: 8,
+    description: "Voa sobre o campo de batalha, atacando diretamente o oponente.",
+    image: "/lovable-uploads/697e7ca7-ce56-4651-8521-3ddc604fbf0e.png",
+    rarity: "epic",
+    cost: 7
+  },
+  {
+    id: 10,
+    name: "Ceifador Carmesim da Alma",
+    type: "monster",
+    element: "shadow",
+    attack: 2600,
+    defense: 2000,
+    level: 7,
+    description: "Rouba alma dos inimigos derrotados, ganhando seus poderes.",
+    image: "/lovable-uploads/7ec0aed1-31eb-4642-a83c-2783d92c1fec.png",
+    rarity: "epic",
+    cost: 6
+  },
+
+  // LEGENDARY MONSTERS RENOVADOS
+  {
+    id: 11,
+    name: "Fênix Imperatriz do Renascimento",
     type: "monster",
     element: "fire",
     attack: 2400,
@@ -32,8 +164,8 @@ export const gameCards: Card[] = [
     cost: 8
   },
   {
-    id: 2,
-    name: "Leviatã do Abismo",
+    id: 12,
+    name: "Leviatã Soberano dos Oceanos",
     type: "monster",
     element: "ice",
     attack: 2800,
@@ -45,8 +177,8 @@ export const gameCards: Card[] = [
     cost: 9
   },
   {
-    id: 3,
-    name: "Demônio das Sombras",
+    id: 13,
+    name: "Demônio Senhor da Escuridão",
     type: "monster",
     element: "shadow",
     attack: 3000,
@@ -58,8 +190,8 @@ export const gameCards: Card[] = [
     cost: 10
   },
   {
-    id: 4,
-    name: "Anjo Guardião",
+    id: 14,
+    name: "Arcanjo Protetor Celestial",
     type: "monster",
     element: "holy",
     attack: 2300,
@@ -71,8 +203,8 @@ export const gameCards: Card[] = [
     cost: 8
   },
   {
-    id: 5,
-    name: "Golem de Cristal",
+    id: 15,
+    name: "Colosso de Cristal Eterno",
     type: "monster",
     element: "earth",
     attack: 1800,
@@ -84,10 +216,10 @@ export const gameCards: Card[] = [
     cost: 8
   },
 
-  // EXISTING LEGENDARY DEFENDERS
+  // LEGENDARY DEFENDERS RENOVADOS
   {
-    id: 6,
-    name: "Titã de Pedra Ancestral",
+    id: 16,
+    name: "Titã Guardião das Montanhas",
     type: "monster",
     element: "earth",
     attack: 2000,
@@ -99,8 +231,8 @@ export const gameCards: Card[] = [
     cost: 8
   },
   {
-    id: 7,
-    name: "Mestre do Vazio Eterno",
+    id: 17,
+    name: "Soberano do Vazio Cósmico",
     type: "monster",
     element: "shadow",
     attack: 2200,
@@ -112,10 +244,10 @@ export const gameCards: Card[] = [
     cost: 9
   },
 
-  // FIRE ELEMENT MONSTERS
+  // MONSTROS ELEMENTO FOGO RENOVADOS
   {
-    id: 11,
-    name: "Dragão Flamejante",
+    id: 20,
+    name: "Dragão Imperador das Chamas",
     type: "monster",
     element: "fire",
     attack: 2800,
