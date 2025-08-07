@@ -7,6 +7,7 @@ import { ShoppingCart, Coins, Star, Sparkles } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
 import { Navigation } from "../components/Navigation";
 import { cn } from "@/lib/utils";
+import { gameCards } from "../data/cards";
 
 const premiumDecks = [
   {
@@ -65,138 +66,8 @@ const premiumDecks = [
   }
 ];
 
-const showcaseCards: Card[] = [
-  {
-    id: 4001,
-    name: "Arcanjo Supremo",
-    type: "monster",
-    element: "holy",
-    attack: 4000,
-    defense: 3500,
-    level: 12,
-    description: "O mais poderoso dos arcanjos, mensageiro divino supremo.",
-    image: "/lovable-uploads/Arcanjo.webp",
-    rarity: "legendary",
-    cost: 12
-  },
-  {
-    id: 4002,
-    name: "Miguel Arcanjo",
-    type: "monster",
-    element: "holy",
-    attack: 4500,
-    defense: 4000,
-    level: 12,
-    description: "O mais poderoso guerreiro celestial, líder dos exércitos divinos.",
-    image: "/lovable-uploads/Miguel.jpeg",
-    rarity: "legendary",
-    cost: 12
-  },
-  {
-    id: 4003,
-    name: "Lorde Infernal",
-    type: "monster",
-    element: "shadow",
-    attack: 4200,
-    defense: 2800,
-    level: 12,
-    description: "Senhor supremo dos infernos com poder sobre as trevas.",
-    image: "/lovable-uploads/Lorde infernal.webp",
-    rarity: "legendary",
-    cost: 12
-  },
-  {
-    id: 4004,
-    name: "Aquamon",
-    type: "monster",
-    element: "ice",
-    attack: 3500,
-    defense: 2800,
-    level: 10,
-    description: "Senhor dos oceanos profundos com poderes aquáticos divinos.",
-    image: "/lovable-uploads/Aquamon.webp",
-    rarity: "legendary",
-    cost: 10
-  },
-  {
-    id: 4005,
-    name: "Fênix Ardente",
-    type: "monster",
-    element: "fire",
-    attack: 3800,
-    defense: 3000,
-    level: 11,
-    description: "Ave lendária das chamas eternas que renasce das cinzas.",
-    image: "/lovable-uploads/Fenix ardente.webp",
-    rarity: "legendary",
-    cost: 11
-  },
-  {
-    id: 4006,
-    name: "Athena, Deusa da Sabedoria",
-    type: "monster",
-    element: "holy",
-    attack: 4000,
-    defense: 3600,
-    level: 11,
-    description: "Divindade da estratégia e conhecimento, protetora dos heróis.",
-    image: "/lovable-uploads/athena.webp",
-    rarity: "legendary",
-    cost: 11
-  },
-  {
-    id: 4007,
-    name: "Terra Colossos",
-    type: "monster",
-    element: "earth",
-    attack: 4200,
-    defense: 4800,
-    level: 12,
-    description: "Gigante primordial feito da própria essência da terra.",
-    image: "/lovable-uploads/terra colosos.webp",
-    rarity: "legendary",
-    cost: 12
-  },
-  {
-    id: 4008,
-    name: "Lucifer, o Anjo Caído",
-    type: "monster",
-    element: "shadow",
-    attack: 5000,
-    defense: 4000,
-    level: 12,
-    description: "O mais poderoso dos anjos caídos, mestre das trevas supremas.",
-    image: "/lovable-uploads/lucifer.webp",
-    rarity: "legendary",
-    cost: 12
-  },
-  {
-    id: 4009,
-    name: "Águia Trovão",
-    type: "monster",
-    element: "lightning",
-    attack: 3600,
-    defense: 2800,
-    level: 10,
-    description: "Majestosa ave dos céus que comanda os trovões e relâmpagos.",
-    image: "/lovable-uploads/Águia trovão.webp",
-    rarity: "legendary",
-    cost: 10
-  },
-  {
-    id: 4010,
-    name: "Executor das Sombras",
-    type: "monster",
-    element: "shadow",
-    attack: 3600,
-    defense: 2800,
-    level: 10,
-    description: "Carrasco implacável que serve às forças das trevas.",
-    image: "/lovable-uploads/executor.webp",
-    rarity: "legendary",
-    cost: 10
-  }
-];
+// Use all cards from the game data
+const showcaseCards: Card[] = gameCards.slice(0, 30); // Show first 30 cards for better performance
 
 export default function Marketplace() {
   const [selectedDeck, setSelectedDeck] = useState<string | null>(null);
@@ -359,8 +230,8 @@ export default function Marketplace() {
             <Sparkles className="w-8 h-8 text-purple-400" />
             Pré-visualização das Cartas
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {showcaseCards.map((card) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+            {gameCards.map((card) => (
               <div key={card.id} className="transform hover:scale-105 transition-all duration-300">
                 <GameCard card={card} />
               </div>
