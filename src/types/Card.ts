@@ -11,7 +11,7 @@ export interface Card {
   level: number;
   description: string;
   image: string;
-  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
+  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary' | 'mythical';
   cost: number;
 }
 
