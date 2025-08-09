@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { achievements } from "@/data/achievements";
 import { adventureMissions, dailyMissions } from "@/data/missions";
 import { Crown, Target, Calendar, Map, ArrowLeft } from "lucide-react";
+import { Header } from "@/components/Header";
 import { Navigation } from "@/components/Navigation";
 
 const Achievements = () => {
@@ -32,8 +33,9 @@ const Achievements = () => {
 
   return (
     <div className="min-h-screen bg-background p-4">
+      <Header />
       {/* Header */}
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className="max-w-6xl mx-auto space-y-6 pt-16">
         <div className="flex items-center justify-between">
           <Button variant="ghost" onClick={() => navigate("/")}>
             <ArrowLeft className="w-4 h-4 mr-2" />

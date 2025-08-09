@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Arena from "./pages/Arena";
 import Marketplace from "./pages/Marketplace";
 import Achievements from "./pages/Achievements";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/arena" element={<Arena />} />
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/achievements" element={<Achievements />} />
+          <Route path="/auth" element={<Auth />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

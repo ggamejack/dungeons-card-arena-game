@@ -12,6 +12,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { calculateBattle, calculateBattlePoints, getAIStrategy, getElementalAdvantage, canSummonCard, getProgressiveEnergy } from "@/utils/battleSystem";
+import { Header } from "@/components/Header";
 import { Navigation } from "@/components/Navigation";
 
 const createInitialDeck = (): Card[] => {
@@ -391,6 +392,7 @@ export default function Arena() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 overflow-hidden">
+      <Header />
       {/* Animated Background - Mobile Optimized */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-20 sm:-top-40 -right-20 sm:-right-40 w-40 sm:w-80 h-40 sm:h-80 bg-gradient-fire rounded-full opacity-20 animate-magical-float"></div>
@@ -437,7 +439,7 @@ export default function Arena() {
         </div>
       </div>
 
-      <div className="relative z-10 p-2 sm:p-6 space-y-4 sm:space-y-8">
+      <div className="relative z-10 p-2 sm:p-6 pt-20 space-y-4 sm:space-y-8">
         {/* Opponent Area - Mobile Optimized */}
         <div className="space-y-2 sm:space-y-4 animate-fade-in">
           <div className="flex items-center justify-between p-2 sm:p-4 bg-destructive/10 rounded-xl border border-destructive/20">

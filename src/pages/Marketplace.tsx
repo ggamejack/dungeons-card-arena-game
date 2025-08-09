@@ -5,9 +5,10 @@ import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
 import { ShoppingCart, Coins, Star, Sparkles } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
+import { Header } from "../components/Header";
 import { Navigation } from "../components/Navigation";
 import { cn } from "@/lib/utils";
-import { gameCards } from "../data/cards";
+import { allCards } from "../data/cards";
 
 const premiumDecks = [
   {
@@ -67,7 +68,7 @@ const premiumDecks = [
 ];
 
 // Use all cards from the game data
-const showcaseCards: Card[] = gameCards.slice(0, 30); // Show first 30 cards for better performance
+const showcaseCards: Card[] = allCards.slice(0, 30); // Show first 30 cards for better performance
 
 export default function Marketplace() {
   const [selectedDeck, setSelectedDeck] = useState<string | null>(null);
@@ -101,7 +102,8 @@ export default function Marketplace() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
-      <div className="max-w-7xl mx-auto">
+      <Header />
+      <div className="max-w-7xl mx-auto pt-16">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
@@ -231,7 +233,7 @@ export default function Marketplace() {
             Pré-visualização das Cartas
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
-            {gameCards.map((card) => (
+            {allCards.map((card) => (
               <div key={card.id} className="transform hover:scale-105 transition-all duration-300">
                 <GameCard card={card} />
               </div>

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { GameCard } from "@/components/GameCard";
-import { DarkModeToggle } from "@/components/DarkModeToggle";
+import { Header } from "@/components/Header";
 import { allCards } from "@/data/cards";
 import { useNavigate } from "react-router-dom";
 import { Swords, Sparkles, Crown, Zap, Trophy } from "lucide-react";
@@ -16,11 +16,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <DarkModeToggle />
+      <Header />
       
       {/* Hero Section */}
       <section 
-        className="relative min-h-screen flex items-center justify-center text-center bg-cover bg-center"
+        className="relative min-h-screen flex items-center justify-center text-center bg-cover bg-center pt-16"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
