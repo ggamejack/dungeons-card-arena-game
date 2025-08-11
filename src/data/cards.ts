@@ -1,5 +1,11 @@
 import { Card } from "@/types/Card";
 
+// Import magic card images
+import fireExplosion from "@/assets/cards/fire-explosion.jpg";
+import iceShield from "@/assets/cards/ice-shield.jpg";
+import divineHeal from "@/assets/cards/divine-heal.jpg";
+import lightningStorm from "@/assets/cards/lightning-storm.jpg";
+
 // Deck cover images
 export const deckCovers = {
   dragonsFire: "/dungeons-card-arena-game/lovable-uploads/43109396-a769-44b4-818f-1f797ee22f52.png",
@@ -483,7 +489,7 @@ export const gameCards: Card[] = [
     element: "fire",
     level: 3,
     description: "Causa 800 de dano direto ao oponente.",
-    image: "",
+    image: fireExplosion,
     rarity: "common",
     cost: 2
   },
@@ -494,7 +500,7 @@ export const gameCards: Card[] = [
     element: "ice",
     level: 2,
     description: "Aumenta a defesa de um monstro em 500 pontos.",
-    image: "",
+    image: iceShield,
     rarity: "common",
     cost: 1
   },
@@ -505,7 +511,7 @@ export const gameCards: Card[] = [
     element: "holy",
     level: 4,
     description: "Restaura 1000 pontos de vida.",
-    image: "",
+    image: divineHeal,
     rarity: "uncommon",
     cost: 3
   },
@@ -516,7 +522,7 @@ export const gameCards: Card[] = [
     element: "lightning",
     level: 5,
     description: "Destroi todos os monstros com ATK menor que 1500.",
-    image: "",
+    image: lightningStorm,
     rarity: "rare",
     cost: 4
   },
