@@ -13,57 +13,57 @@ import { allCards } from "../data/cards";
 const premiumDecks = [
   {
     id: "premium-angels",
-    name: "Deck dos Anjos Celestiais",
-    description: "Uma coleção épica de anjos com poderes divinos",
+    name: "Ascensão Celestial",
+    description: "Comandos divinos dos céus com anjos e serafins supremos",
     price: 25.99,
     cards: 15,
     rarity: "Legendary",
-    image: "/lovable-uploads/Arcanjo.webp"
+    image: "/dungeons-card-arena-game/lovable-uploads/Arcanjo.webp"
   },
   {
     id: "premium-shadows",
-    name: "Deck das Sombras",
-    description: "Criaturas das trevas com poderes sombrios",
+    name: "Império das Trevas",
+    description: "Legião sombria dos senhores infernais e demônios ancestrais",
     price: 23.99,
     cards: 15,
     rarity: "Epic",
-    image: "/lovable-uploads/Lorde infernal.webp"
+    image: "/dungeons-card-arena-game/lovable-uploads/Lorde infernal.webp"
   },
   {
     id: "premium-elementals",
-    name: "Deck dos Elementais Supremos",
-    description: "Mestres dos elementos com poderes devastadores",
+    name: "Fúria dos Elementos",
+    description: "Mestres primordiais que controlam fogo, água, terra e ar",
     price: 29.99,
     cards: 20,
     rarity: "Legendary",
-    image: "/lovable-uploads/Aquamon.webp"
+    image: "/dungeons-card-arena-game/lovable-uploads/Aquamon.webp"
   },
   {
     id: "premium-divine",
-    name: "Deck dos Seres Divinos",
-    description: "Criaturas celestiais com poderes supremos",
+    name: "Corte dos Imortais",
+    description: "Divindades supremas e arcanjos com poderes transcendentais",
     price: 39.99,
     cards: 25,
     rarity: "Mythical",
-    image: "/lovable-uploads/Miguel.jpeg"
+    image: "/dungeons-card-arena-game/lovable-uploads/Miguel.jpeg"
   },
   {
     id: "premium-guardians",
-    name: "Deck dos Guardiões",
-    description: "Protetores ancestrais com defesas impenetráveis",
+    name: "Guardiões Eternos",
+    description: "Sentinelas milenares que protegem os segredos do universo",
     price: 32.99,
     cards: 20,
     rarity: "Legendary",
-    image: "/lovable-uploads/Sentinela.webp"
+    image: "/dungeons-card-arena-game/lovable-uploads/Sentinela.webp"
   },
   {
     id: "premium-mystics",
-    name: "Deck dos Místicos",
-    description: "Sábios e videntes com poderes sobrenaturais",
+    name: "Círculo Arcano",
+    description: "Magos supremos e profetisas com conhecimento ancestral",
     price: 27.99,
     cards: 18,
     rarity: "Epic",
-    image: "/lovable-uploads/Sara.webp"
+    image: "/dungeons-card-arena-game/lovable-uploads/Sara.webp"
   }
 ];
 
