@@ -2,19 +2,19 @@ import { Card } from "@/types/Card";
 
 // Deck cover images
 export const deckCovers = {
-  dragonsFire: "/lovable-uploads/43109396-a769-44b4-818f-1f797ee22f52.png",
-  celestialGuardians: "/lovable-uploads/b745b9a0-bb80-4788-92ff-04357d1d3a69.png",
-  shadowsDeck: "/lovable-uploads/9eecb997-c318-4245-8002-492ea0f546bf.png",
-  pureElements: "/lovable-uploads/15a8d434-2b12-4b22-8537-31e198cdcdd8.png"
+  dragonsFire: "/dungeons-card-arena-game/lovable-uploads/43109396-a769-44b4-818f-1f797ee22f52.png",
+  celestialGuardians: "/dungeons-card-arena-game/lovable-uploads/b745b9a0-bb80-4788-92ff-04357d1d3a69.png",
+  shadowsDeck: "/dungeons-card-arena-game/lovable-uploads/9eecb997-c318-4245-8002-492ea0f546bf.png",
+  pureElements: "/dungeons-card-arena-game/lovable-uploads/15a8d434-2b12-4b22-8537-31e198cdcdd8.png"
 };
 
 // Card images using lovable-uploads directory
-const phoenixScarlet = "/lovable-uploads/43109396-a769-44b4-818f-1f797ee22f52.png";
-const leviathanAbyss = "/lovable-uploads/93e1cfb2-1a99-42de-b3f1-c70a260bd479.png";
-const demonEternalNight = "/lovable-uploads/9eecb997-c318-4245-8002-492ea0f546bf.png";
-const guardianAngel = "/lovable-uploads/b745b9a0-bb80-4788-92ff-04357d1d3a69.png";
-const crystalGolem = "/lovable-uploads/15a8d434-2b12-4b22-8537-31e198cdcdd8.png";
-const meteorRain = "/lovable-uploads/38499ffe-dbfa-4b49-a357-8cac32af8b3c.png";
+const phoenixScarlet = "/dungeons-card-arena-game/lovable-uploads/43109396-a769-44b4-818f-1f797ee22f52.png";
+const leviathanAbyss = "/dungeons-card-arena-game/lovable-uploads/93e1cfb2-1a99-42de-b3f1-c70a260bd479.png";
+const demonEternalNight = "/dungeons-card-arena-game/lovable-uploads/9eecb997-c318-4245-8002-492ea0f546bf.png";
+const guardianAngel = "/dungeons-card-arena-game/lovable-uploads/b745b9a0-bb80-4788-92ff-04357d1d3a69.png";
+const crystalGolem = "/dungeons-card-arena-game/lovable-uploads/15a8d434-2b12-4b22-8537-31e198cdcdd8.png";
+const meteorRain = "/dungeons-card-arena-game/lovable-uploads/38499ffe-dbfa-4b49-a357-8cac32af8b3c.png";
 
 export const gameCards: Card[] = [
   // NEW LEGENDARY MONSTERS FROM UPLOADED IMAGES
@@ -27,7 +27,7 @@ export const gameCards: Card[] = [
     defense: 2400,
     level: 10,
     description: "Invoca chamas eternas que queimam todos os inimigos por 2 turnos.",
-    image: "/lovable-uploads/aa60833c-1a1d-42f9-8a5a-623c2680dd66.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/aa60833c-1a1d-42f9-8a5a-623c2680dd66.png",
     rarity: "legendary",
     cost: 10
   },
@@ -40,7 +40,7 @@ export const gameCards: Card[] = [
     defense: 3200,
     level: 9,
     description: "Regenera 500 HP por turno e invoca criaturas da floresta para defender.",
-    image: "/lovable-uploads/95d7f334-3ad5-4bf7-9369-97c8d3b6f1f5.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/95d7f334-3ad5-4bf7-9369-97c8d3b6f1f5.png",
     rarity: "legendary",
     cost: 9
   },
@@ -53,7 +53,7 @@ export const gameCards: Card[] = [
     defense: 2100,
     level: 8,
     description: "Ataques com raio causam dano em área a todos os inimigos.",
-    image: "/lovable-uploads/bf06f617-03b4-4674-9ba0-1ffec83d30e9.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/bf06f617-03b4-4674-9ba0-1ffec83d30e9.png",
     rarity: "legendary",
     cost: 8
   },
@@ -66,7 +66,7 @@ export const gameCards: Card[] = [
     defense: 1900,
     level: 9,
     description: "Drena energia do oponente a cada ataque bem-sucedido.",
-    image: "/lovable-uploads/58783f01-6f72-4528-9187-8eff513ef019.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/58783f01-6f72-4528-9187-8eff513ef019.png",
     rarity: "legendary",
     cost: 9
   },
@@ -79,7 +79,7 @@ export const gameCards: Card[] = [
     defense: 2800,
     level: 8,
     description: "Cura aliados e aumenta seus atributos com música celestial.",
-    image: "/lovable-uploads/1cd9c2fa-ff6a-415f-a695-40de090909ff.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/1cd9c2fa-ff6a-415f-a695-40de090909ff.png",
     rarity: "legendary",
     cost: 8
   },
@@ -92,7 +92,7 @@ export const gameCards: Card[] = [
     defense: 2500,
     level: 10,
     description: "Invoca o fim dos tempos, causando dano massivo a tudo no campo.",
-    image: "/lovable-uploads/93bf7b5f-9438-4cdb-8b6b-394c24d511ce.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/93bf7b5f-9438-4cdb-8b6b-394c24d511ce.png",
     rarity: "legendary",
     cost: 10
   },
@@ -105,7 +105,7 @@ export const gameCards: Card[] = [
     defense: 2300,
     level: 8,
     description: "Ressuscita criaturas do cemitério para lutar ao seu lado.",
-    image: "/lovable-uploads/976013e0-3279-4109-a272-e0c28cefb039.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/976013e0-3279-4109-a272-e0c28cefb039.png",
     rarity: "epic",
     cost: 7
   },
@@ -118,7 +118,7 @@ export const gameCards: Card[] = [
     defense: 2600,
     level: 9,
     description: "Fica mais forte conforme derrota inimigos, ganhando +200 ATK por vitória.",
-    image: "/lovable-uploads/8aa6924a-e2f1-4bd3-9b47-f097615ab4fd.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/8aa6924a-e2f1-4bd3-9b47-f097615ab4fd.png",
     rarity: "epic",
     cost: 8
   },
@@ -131,7 +131,7 @@ export const gameCards: Card[] = [
     defense: 1800,
     level: 8,
     description: "Voa sobre o campo de batalha, atacando diretamente o oponente.",
-    image: "/lovable-uploads/697e7ca7-ce56-4651-8521-3ddc604fbf0e.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/697e7ca7-ce56-4651-8521-3ddc604fbf0e.png",
     rarity: "epic",
     cost: 7
   },
@@ -144,7 +144,7 @@ export const gameCards: Card[] = [
     defense: 2000,
     level: 7,
     description: "Rouba alma dos inimigos derrotados, ganhando seus poderes.",
-    image: "/lovable-uploads/7ec0aed1-31eb-4642-a83c-2783d92c1fec.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/7ec0aed1-31eb-4642-a83c-2783d92c1fec.png",
     rarity: "epic",
     cost: 6
   },
