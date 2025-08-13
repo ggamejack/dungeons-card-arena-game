@@ -232,7 +232,7 @@ export const gameCards: Card[] = [
     defense: 3000,
     level: 9,
     description: "Guardião colossal das montanhas sagradas.",
-    image: "/lovable-uploads/3833f380-167f-4450-8c55-edd75f89573a.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/3833f380-167f-4450-8c55-edd75f89573a.png",
     rarity: "legendary",
     cost: 8
   },
@@ -245,7 +245,7 @@ export const gameCards: Card[] = [
     defense: 3000,
     level: 9,
     description: "Senhor supremo das dimensões sombrias.",
-    image: "/lovable-uploads/517299d0-5067-485f-a545-b3c3f3310e94.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/517299d0-5067-485f-a545-b3c3f3310e94.png",
     rarity: "legendary",
     cost: 9
   },
@@ -260,7 +260,7 @@ export const gameCards: Card[] = [
     defense: 2000,
     level: 9,
     description: "Destrói uma carta de auxílio inimiga ao atacar.",
-    image: "/lovable-uploads/896816f6-7b9a-4f82-9500-6ec8d0310dbf.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/896816f6-7b9a-4f82-9500-6ec8d0310dbf.png",
     rarity: "epic",
     cost: 6
   },
@@ -273,7 +273,7 @@ export const gameCards: Card[] = [
     defense: 1600,
     level: 7,
     description: "Aumenta o ATK de todos os monstros de Fogo em 500.",
-    image: "/lovable-uploads/5d26b512-6c40-4b73-9488-03629396725d.png",
+    image: "/dungeons-card-arena-game/lovable-uploads/5d26b512-6c40-4b73-9488-03629396725d.png",
     rarity: "epic",
     cost: 5
   },
